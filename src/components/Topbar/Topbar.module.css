@@ -1,0 +1,10 @@
+.topbarBrand {
+    padding-left: 30px;
+    font-size: 30px;
+}
+
+.topbarProfile {
+    display: flex;
+    justify-content: end;
+    padding-right: 30px;
+}
