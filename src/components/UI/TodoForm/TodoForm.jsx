@@ -1,52 +1,60 @@
 import React, {useState} from 'react';
-import cl from './TodoForm.module.css';
 
-const TodoForm = ({listItemForm, addingItems, modal}) => {
+const TodoForm = ({ newItemForm, itemCU, modal }) => {
 
-    if (!modal) return(<div></div>)
+    if (modal !== 1 && modal !== 2) return(<div className='d-none'></div>)
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [inputValue1, setInputValue1] = useState("")
+    const [inputValue, setInputValue] = useState(newItemForm.newItem.title)
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [inputValue2, setInputValue2] = useState("")
+    const [textValue, setTextValue] = useState(newItemForm.newItem.text)
+
+    function doCRUD(item) {
+        if (modal === 1) itemCU.createItem(newItemForm.newItem)
+        else if (modal === 2) itemCU.updateItem(newItemForm.newItem)
+    }
 
     return (
-        <div className={"input-group"}>
-            <input
-                type="text"
-                className="form-control"
-                placeholder="Заголовок"
-                value={inputValue1}
-                onChange={e => {
-                    setInputValue1(e.target.value)
-                    listItemForm.setNewItem({
-                        id: listItemForm.newItem.id,
-                        title: e.target.value,
-                        text: listItemForm.newItem.text
-                    })
-                }}
-            ></input>
-            <input
-                type="text"
-                className="form-control"
-                placeholder="Описание"
-                value={inputValue2}
-                onChange={e => {
-                    setInputValue2(e.target.value)
-                    listItemForm.setNewItem({
-                        id: listItemForm.newItem.id,
-                        title: listItemForm.newItem.title,
-                        text: e.target.value
-                    })
-                }}
-            ></input>
+        <div className="input-group d-flex flex-column">
+            <div className="mb-3">
+                <label htmlFor="exampleFormControlInput1" className="form-label">Заголовок</label>
+                <input
+                    type="text"
+                    className="form-control"
+                    value={inputValue}
+                    onChange={e => {
+                        setInputValue(e.target.value)
+                        newItemForm.setNewItem({
+                            id: newItemForm.newItem.id,
+                            title: e.target.value,
+                            text: newItemForm.newItem.text
+                        })
+                    }}
+                />
+            </div>
+            <div className="mb-3">
+                <label className="form-label">Описание</label>
+                <textarea
+                    className="form-control"
+                    rows="3"
+                    value={textValue}
+                    onChange={e => {
+                        setTextValue(e.target.value)
+                        newItemForm.setNewItem({
+                            id: newItemForm.newItem.id,
+                            title: newItemForm.newItem.title,
+                            text: e.target.value
+                        })
+                    }}
+                ></textarea>
+            </div>
             <button
                 className="btn btn-primary"
                 type="button"
                 onClick={() => {
-                    setInputValue1("")
-                    setInputValue2("")
-                    addingItems()
+                    setInputValue("")
+                    setTextValue("")
+                    doCRUD(newItemForm.newItem)
                 }}
             >Добавить задачу</button>
         </div>

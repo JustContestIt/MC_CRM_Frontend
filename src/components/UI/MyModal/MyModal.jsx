@@ -4,12 +4,12 @@ import cl from './MyModal.module.css';
 const MyModal = ({children, visible, setVisible}) => {
 
     const rootClasses = [cl.myModal];
-    if (visible) {
+    if (visible !== 0) {
         rootClasses.push(cl.active)
     }
 
     return (
-        <div className={rootClasses.join(' ')} onClick={() => setVisible(false)}>
+        <div className={rootClasses.join(' ')} onClick={() => setVisible(0)}>
             <div className={cl.myModalContent} onClick={(e) => e.stopPropagation()}>
                 {children}
             </div>

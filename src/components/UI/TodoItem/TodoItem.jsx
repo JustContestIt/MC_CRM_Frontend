@@ -2,10 +2,10 @@ import React from 'react';
 import cl from './TodoItem.module.css';
 
 const TodoItem = (props) => {
+
     return (
-        <div
-            className={"mb-1 pb-2 list-group-item list-group-item-action " + cl.listItem}
-            aria-current="true"
+        <li
+            className={"mb-1 pb-2 list-group-item " + cl.listItem}
             key={props.item.id}
         >
             <div className="d-flex w-100 justify-content-start mt-3">
@@ -17,20 +17,20 @@ const TodoItem = (props) => {
                     <button
                         type='button'
                         className='btn btn-outline-primary'
-                        onClick={() => props.remove(props.item)}
+                        onClick={() => props.callTodoForm(props.item, 2)}
                     >
                         Редактировать
                     </button>
                     <button
                         type='button'
                         className='btn btn-success'
-                        onClick={() => props.remove(props.item)}
+                        onClick={() => props.callTodoForm(props.item, 3)}
                     >
                         Сделано
                     </button>
                 </div>
             </div>
-        </div>
+        </li>
     );
 };
 
