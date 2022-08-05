@@ -26,7 +26,6 @@ const TodoList = ({items, setItems}) => {
     }
 
     function createItem() {
-        console.log(newItem)
         if(!newItem || newItem.title === "") {
             alert("Введено пустое название задачи");
             return;
