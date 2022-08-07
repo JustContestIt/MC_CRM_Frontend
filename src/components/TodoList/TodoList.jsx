@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import TodoItem from "../UI/TodoItem/TodoItem";
+import TodoItem from "./TodoItem/TodoItem";
 import cl from './TodoList.module.css';
-import TodoForm from "../UI/TodoForm/TodoForm";
+import TodoForm from "./TodoForm/TodoForm";
 import MyModal from "../UI/MyModal/MyModal";
 
 const TodoList = ({items, setItems}) => {
@@ -18,8 +18,15 @@ const TodoList = ({items, setItems}) => {
     });
     const newItemForm = {
         newItem,
-        setNewItem
+        setNewItem,
+        newItemExample: {
+            id: 0,
+            title: "",
+            text:""
+        }
     };
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [emptyList, setEmptyList] = useState(false)
     const TodoItemCU = {
         createItem,
         updateItem
@@ -30,6 +37,7 @@ const TodoList = ({items, setItems}) => {
             alert("Введено пустое название задачи");
             return;
         }
+        setEmptyList(false)
         const item = {
             id: items.length + 1,
             title: newItem.title,
@@ -46,7 +54,13 @@ const TodoList = ({items, setItems}) => {
 
     function deleteItem(oldItem) {
         const newArray = items.filter(item => item !== oldItem);
+        let id = 0
+        newArray.map(item => {
+            item.id = id
+            id += 1
+        })
         setItems(newArray);
+        if (newArray.length === 0) setEmptyList(true)
     }
 
     function updateItem() {
@@ -70,28 +84,33 @@ const TodoList = ({items, setItems}) => {
     }
 
     return (
-        <div className="content mx-3">
-            <MyModal visible={modal} setVisible={setModal}>
-                <TodoForm
-                    newItemForm={newItemForm}
-                    itemCU={TodoItemCU}
-                    modal={modal}
-                />
+        <div className={"p-2 content mx-3 rounded-3 mt-2 " + cl.todoList}>
+            <MyModal visible={modal} setVisible={setModal} setItem={newItemForm}>
+                <TodoForm newItemForm={newItemForm} itemCU={TodoItemCU} modal={modal}/>
             </MyModal>
-            <button onClick={() => setModal(1)}>Создать</button>
-            <div className='d-flex flex-column flex-wrap'>
-                <ul className={"list-group list-group-numbered " + cl}>
+            <div className='d-flex justify-content-between align-items-center'>
+                <div className='px-4 fs-3'>Задачи</div>
+                <button
+                    type='button'
+                    className='btn btn-primary mb-2 mt-3'
+                    onClick={() => setModal(1)}
+                >Создать</button>
+            </div>
+            <div className='d-flex flex-column'>
+                <ul className="list-group">
+                    <TodoItem callTodoForm={callTodoForm} item={items} empty={emptyList} itemId={0}/>
                     {items.map(item => {
                         return(
                             <TodoItem
                                 callTodoForm={callTodoForm}
                                 item={item}
-                                modal={modal}
-                                setModal={setModal}
+                                empty={emptyList}
+                                itemId={1}
                                 key={item.id}
                             />
                         )
-                    })}
+                        })
+                    }
                 </ul>
             </div>
         </div>

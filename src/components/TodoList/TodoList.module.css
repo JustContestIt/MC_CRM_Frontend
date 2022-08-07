@@ -1,5 +1,7 @@
 .todoList {
-    border-radius: 0.5rem;
-    border: 2px solid #757F9A;
-    max-width: 300px;
+    width: 390px;
+    max-height: 88vh;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    overflow: auto;
 }

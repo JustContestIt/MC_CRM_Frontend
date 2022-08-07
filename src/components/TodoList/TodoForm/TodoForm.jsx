@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const TodoForm = ({ newItemForm, itemCU, modal }) => {
+const TodoForm = ({ newItemForm, itemCU, modal}) => {
 
     if (modal !== 1 && modal !== 2) return(<div className='d-none'></div>)
 
@@ -8,16 +8,17 @@ const TodoForm = ({ newItemForm, itemCU, modal }) => {
     const [inputValue, setInputValue] = useState(newItemForm.newItem.title)
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [textValue, setTextValue] = useState(newItemForm.newItem.text)
+    const btnLabel = ["", "Добавить задачу", "Изменить задачу"]
 
-    function doCRUD(item) {
+    function doCRUD() {
         if (modal === 1) itemCU.createItem(newItemForm.newItem)
-        else if (modal === 2) itemCU.updateItem(newItemForm.newItem)
+        else itemCU.updateItem(newItemForm.newItem)
     }
 
     return (
         <div className="input-group d-flex flex-column">
             <div className="mb-3">
-                <label htmlFor="exampleFormControlInput1" className="form-label">Заголовок</label>
+                <label className="form-label">Заголовок</label>
                 <input
                     type="text"
                     className="form-control"
@@ -49,14 +50,14 @@ const TodoForm = ({ newItemForm, itemCU, modal }) => {
                 ></textarea>
             </div>
             <button
-                className="btn btn-primary"
+                className="btn btn-primary mb-1 rounded"
                 type="button"
                 onClick={() => {
                     setInputValue("")
                     setTextValue("")
-                    doCRUD(newItemForm.newItem)
+                    doCRUD()
                 }}
-            >Добавить задачу</button>
+            >{btnLabel[modal]}</button>
         </div>
     );
 };

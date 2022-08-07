@@ -1,15 +1,14 @@
 import React from 'react';
-import ButtonArrow from "./UI/ButtonArrow/ButtonArrow";
 import {useState} from "react";
 
 const Sidebar = () => {
 
     const [sidebarStatus, setSidebarStatus] = useState("");
 
-    function makeComponentActive(){
-        if(sidebarStatus === "active") setSidebarStatus("shadow-lg")
-        else setSidebarStatus("active")
-    }
+    // function makeComponentActive(){
+    //     if(sidebarStatus === "active") setSidebarStatus("shadow-lg")
+    //     else setSidebarStatus("active")
+    // }
 
     return (
         <nav className={sidebarStatus} id='sidebar'>
@@ -23,13 +22,13 @@ const Sidebar = () => {
             {/*</div>*/}
             <ul className="components">
                 <li className="active">
-                    <a href="#">Главная</a>
+                    <a href="src/components/Sidebar/Sidebar#">Главная</a>
                 </li>
                 <li>
-                    <a href="#">Группы</a>
+                    <a href="src/components/Sidebar/Sidebar#">Группы</a>
                 </li>
                 <li>
-                    <a href="#">Тренеры</a>
+                    <a href="src/components/Sidebar/Sidebar#">Тренеры</a>
                 </li>
             </ul>
         </nav>

@@ -4,7 +4,7 @@ html{
 
 body {
     font-family: 'Roboto Mono', monospace;
-    background: #fafafa;
+    background: #fff;
 }
 
 p {
@@ -16,8 +16,8 @@ p {
 }
 
 .logo{
-    width: 25%;
-    height: 25%;
+    width: 30%;
+    height: 30%;
     max-width: 140px;
     margin: 16px 0 24px;
 }
@@ -118,6 +118,7 @@ a, a:hover, a:focus {
     color: #fff;
     background: #6879c2;
 }
+
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
@@ -137,3 +138,10 @@ ul ul a {
     border-radius: 100px;
 }
 
+#todoItemTitle {
+    font-size: 20px;
+    font-weight: 600;
+    background-image: linear-gradient(to left, #553c9a, #b393d3);
+    color: transparent;
+    -webkit-background-clip: text;
+}
