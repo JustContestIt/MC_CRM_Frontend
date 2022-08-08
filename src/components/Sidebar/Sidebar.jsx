@@ -1,5 +1,6 @@
 import React from 'react';
 import {useState} from "react";
+import {Link} from "react-router-dom";
 
 const Sidebar = () => {
 
@@ -22,13 +23,13 @@ const Sidebar = () => {
             {/*</div>*/}
             <ul className="components">
                 <li className="active">
-                    <a href="src/components/Sidebar/Sidebar#">Главная</a>
+                    <Link to='/main'>Главная</Link>
                 </li>
                 <li>
-                    <a href="src/components/Sidebar/Sidebar#">Группы</a>
+                    <Link to='/profile'>Группы</Link>
                 </li>
                 <li>
-                    <a href="src/components/Sidebar/Sidebar#">Тренеры</a>
+                    <Link to='/asd'>Тренеры</Link>
                 </li>
             </ul>
         </nav>

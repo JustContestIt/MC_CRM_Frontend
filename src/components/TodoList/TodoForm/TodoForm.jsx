@@ -7,7 +7,7 @@ const TodoForm = ({ newItemForm, itemCU, modal}) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [inputValue, setInputValue] = useState(newItemForm.newItem.title)
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [textValue, setTextValue] = useState(newItemForm.newItem.text)
+    const [textValue, setTextValue] = useState(newItemForm.newItem.body)
     const btnLabel = ["", "Добавить задачу", "Изменить задачу"]
 
     function doCRUD() {
@@ -28,7 +28,7 @@ const TodoForm = ({ newItemForm, itemCU, modal}) => {
                         newItemForm.setNewItem({
                             id: newItemForm.newItem.id,
                             title: e.target.value,
-                            text: newItemForm.newItem.text
+                            body: newItemForm.newItem.text
                         })
                     }}
                 />
@@ -44,7 +44,7 @@ const TodoForm = ({ newItemForm, itemCU, modal}) => {
                         newItemForm.setNewItem({
                             id: newItemForm.newItem.id,
                             title: newItemForm.newItem.title,
-                            text: e.target.value
+                            body: e.target.value
                         })
                     }}
                 ></textarea>

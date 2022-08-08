@@ -40,6 +40,7 @@ p {
     width: 100%;
     height: 100vh;
     overflow-y: scroll;
+    z-index: 111;
 }
 
 .auth-form{
@@ -144,4 +145,53 @@ ul ul a {
     background-image: linear-gradient(to left, #553c9a, #b393d3);
     color: transparent;
     -webkit-background-clip: text;
+}
+
+.profile-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.profile-personal-info {
+    width: 500px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+.profile-info-text {
+    margin-left: 40px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50vh;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.overflowHide {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.spinner-enter {
+    opacity: 0;
+}
+.spinner-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+.spinner-exit {
+    opacity: 1;
+}
+.spinner-exit-active {
+    opacity: 0;
+    transition: opacity 500ms ease-in;
 }

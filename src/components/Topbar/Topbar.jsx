@@ -7,7 +7,7 @@ const Topbar = (props) => {
     return (
         <Navbar className='mt-2 mb-2' variant="light" bg="white" expand="lg">
             <Container fluid>
-                <Navbar.Brand className={cl.topbarBrand + ' mx-2 '}>Главная</Navbar.Brand>
+                <Navbar.Brand className={cl.topbarBrand + ' mx-2 '}>{props.title}</Navbar.Brand>
                 <Navbar id="navbar-light" className={cl.topbarProfile}>
                     <Nav>
                         <NavDropdown
@@ -15,8 +15,8 @@ const Topbar = (props) => {
                             title={props.username}
                             menuVariant="light"
                         >
-                            <NavDropdown.Item href="#">Профиль</NavDropdown.Item>
-                            <NavDropdown.Item href="#">Выход</NavDropdown.Item>
+                            <NavDropdown.Item href='/profile'>Профиль</NavDropdown.Item>
+                            <NavDropdown.Item href='/profile'>Выход</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                 </Navbar>
