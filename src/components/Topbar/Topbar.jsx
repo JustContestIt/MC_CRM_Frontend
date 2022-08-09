@@ -16,7 +16,7 @@ const Topbar = (props) => {
                             menuVariant="light"
                         >
                             <NavDropdown.Item href='/profile'>Профиль</NavDropdown.Item>
-                            <NavDropdown.Item href='/profile'>Выход</NavDropdown.Item>
+                            <NavDropdown.Item href='/login'>Выход</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                 </Navbar>

@@ -1,7 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import logo from '../components/img/logo.png';
+import {AuthContext} from "../context/auth";
 
 const Login = () => {
+
+    // const [isAuth, setIsAuth] = useContext(AuthContext)
+
+    const login = event => {
+        event.preventDefault()
+        // setIsAuth(true)
+    }
+
     return (
         <div className='wrapper-login d-flex align-items-center'>
             <div className='d-flex flex-column form-container mx-auto'>

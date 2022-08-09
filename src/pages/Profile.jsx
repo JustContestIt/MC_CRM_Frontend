@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import ProfileInfo from "../components/ProfileInfo";
 
-const Profile = ({profile, setTitle}) => {
+const Profile = ({profile, setTitle, btnActive}) => {
 
     useEffect(() => {
         setTitle("Профиль")
+        btnActive(1)
     }, [])
 
     return (
