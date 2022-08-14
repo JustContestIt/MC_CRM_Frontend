@@ -16,9 +16,12 @@ import {AuthContext} from "./context/auth";
 function App() {
 
     const [profile, setProfile] = useState([])
-    const [pageTitle, setPageTitle] = useState('')
     const [isAuth, setIsAuth] = useState(false)
-    const[btnActive, setBtnActive] = useState(0)
+    const [navbarStatus, setNavbarStatus] = useState({
+        title: '',
+        btnActive: 0,
+        profile
+    })
 
     useEffect(() => {
         fetchProfile()
@@ -26,11 +29,13 @@ function App() {
 
     const [fetchProfile, isLoading, profileError] = useFetching(async () => {
         const profile = await ProfileService.getProfile()
-        setProfile(profile.data)
+        if (!profile) setProfile([{
+            name: 'Just Contest It',
+            email: 'just@contest.it',
+            username: 'JCI'
+        }])
+        else setProfile(profile.data)
     })
-
-
-    console.log(isAuth)
 
 
     return (
@@ -41,20 +46,20 @@ function App() {
             <BrowserRouter>
                 <Spinner isLoading={isLoading}>
                     <div className="App">
-                        <MyNavbar title={pageTitle} profile={profile} btnActive={btnActive}>
+                        <MyNavbar navbarStatus={navbarStatus}>
                             <Routes>
                                 <Route
                                     path='/main'
-                                    element={<Main setTitle={setPageTitle} btnActive={setBtnActive}/>
-                                }/>
+                                    element={<Main navbarStatus={navbarStatus} setNavbarStatus={setNavbarStatus}/>}
+                                />
                                 <Route
                                     path='/profile'
-                                    element={<Profile profile={profile} setTitle={setPageTitle} btnActive={setBtnActive}/>
+                                    element={<Profile navbarStatus={navbarStatus} setNavbarStatus={setNavbarStatus}/>
                                 }/>
                                 <Route
                                     path='/error'
-                                    element={<NotFound/>
-                                }/>
+                                    element={<NotFound/>}
+                                />
                                 <Route
                                     path='*'
                                     element={<NotFound/>}

@@ -2,12 +2,13 @@ import React from 'react';
 import Sidebar from "./Sidebar/Sidebar";
 import Topbar from "./Topbar/Topbar";
 
-const MyNavbar = ({children, profile, title, btnActive}) => {
+const MyNavbar = ({children, navbarStatus}) => {
+
     return (
         <div className='wrapper'>
-            <Sidebar btnActive={btnActive}/>
+            <Sidebar btnActive={navbarStatus.btnActive}/>
             <div className="d-flex flex-column wrapper">
-                <Topbar username={profile[0]?.name} title={title}/>
+                <Topbar username={navbarStatus.profile[0]?.name} title={navbarStatus.title}/>
                 <div className='overflowHide'>
                     {children}
                 </div>

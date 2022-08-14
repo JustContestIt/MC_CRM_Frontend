@@ -1,16 +1,16 @@
 import React from 'react';
 import {useState} from "react";
-import {Link} from "react-router-dom";
+// import {Link} from "react-router-dom";
 import ListItem from "../UI/ListItem/ListItem";
 import ButtonArrow from "../UI/ButtonArrow/ButtonArrow";
+import cl from './Sidebar.module.css';
 
-const Sidebar = (btnActive) => {
+const Sidebar = ({btnActive}) => {
 
     const [sidebarStatus, setSidebarStatus] = useState("");
-    const [isActive, setIsActive] = useState(false)
 
     function makeComponentActive(){
-        if(sidebarStatus === "active") setSidebarStatus("shadow-lg")
+        if(sidebarStatus === "active") setSidebarStatus("")
         else setSidebarStatus("active")
     }
 
@@ -19,20 +19,17 @@ const Sidebar = (btnActive) => {
             <div className="sidebar-header">
                 <h1>M&C</h1>
             </div>
-            <div className="container-fluid sidebar-toggle">
-                <div className="btn-outline-secondary btn-rounded" onClick={makeComponentActive}>
+            <div className={"container-fluid " + cl.sidebarToggle} onClick={makeComponentActive}>
+                <div className="btn-outline-secondary btn-rounded">
                     <ButtonArrow sidebarStatus={sidebarStatus}/>
                 </div>
             </div>
-            <ul className="components">
-                <ListItem isActive={isActive}>
-                    <Link to='/main'>Главная</Link>
+            <ul className={cl.ulComponents}>
+                <ListItem styles={''}>
+                    <a href={'#'}>Главная</a>
                 </ListItem>
-                <ListItem isActive={isActive}>
-                    <Link to='/profile'>Группы</Link>
-                </ListItem>
-                <ListItem isActive={isActive}>
-                    <Link to='/asd'>Тренеры</Link>
+                <ListItem styles={'active'}>
+                    <a href={'#'}>Группы</a>
                 </ListItem>
             </ul>
         </nav>

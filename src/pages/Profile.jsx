@@ -1,16 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import ProfileInfo from "../components/ProfileInfo";
 
-const Profile = ({profile, setTitle, btnActive}) => {
+const Profile = ({navbarStatus, setNavbarStatus}) => {
 
     useEffect(() => {
-        setTitle("Профиль")
-        btnActive(1)
+        setNavbarStatus({
+            title: 'Профиль',
+            btnActive: 2,
+            profile: navbarStatus.profile
+        })
     }, [])
 
     return (
         <div className='d-flex flex-column w-100'>
-            <ProfileInfo profile={profile}/>
+            <ProfileInfo profile={navbarStatus.profile}/>
         </div>
     );
 };

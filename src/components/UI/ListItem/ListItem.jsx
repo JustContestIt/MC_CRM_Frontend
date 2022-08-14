@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 
-const ListItem = ({children, isActive}) => {
+const ListItem = ({children, styles}) => {
 
-    const [styles, setStyles] = useState('')
+    // const [styles, setStyles] = useState('')
 
-    useEffect(() => {
-        if (isActive) setStyles('active')
-        else setStyles('')
-    }, [isActive])
+    // useEffect(() => {
+    //     if (isActive) setStyles('active')
+    //     else setStyles('')
+    // }, [isActive])
 
     return (
         <li className={styles}>

@@ -6,15 +6,13 @@ import MyModal from "../UI/MyModal/MyModal";
 
 const TodoList = ({items, setItems}) => {
 
-    if (!items) return (<div></div>)
-
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [modal, setModal] = useState(0);
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [newItem, setNewItem] = useState({
         id: 0,
         title: "",
-        text: ""
+        body: ""
     });
     const newItemForm = {
         newItem,
@@ -22,7 +20,7 @@ const TodoList = ({items, setItems}) => {
         newItemExample: {
             id: 0,
             title: "",
-            text:""
+            body:""
         }
     };
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -41,13 +39,13 @@ const TodoList = ({items, setItems}) => {
         const item = {
             id: items.length + 1,
             title: newItem.title,
-            text: newItem.text
+            body: newItem.body
         };
         setItems(oldList => [...oldList, item]);
         setNewItem({
             id: 0,
             title: "",
-            text: ""
+            body: ""
         });
         setModal(0)
     }
@@ -70,7 +68,7 @@ const TodoList = ({items, setItems}) => {
         setNewItem({
             id: 0,
             title: "",
-            text: ""
+            body: ""
         });
         setModal(0)
     }
@@ -82,6 +80,27 @@ const TodoList = ({items, setItems}) => {
         }
         else if (modalId === 3) deleteItem(item)
     }
+
+    if (items.length === 0) return (
+        <div className={"p-2 content mx-3 rounded-3 mt-2 " + cl.todoList}>
+            <MyModal visible={modal} setVisible={setModal} setItem={newItemForm}>
+                <TodoForm newItemForm={newItemForm} itemCU={TodoItemCU} modal={modal}/>
+            </MyModal>
+            <div className='d-flex justify-content-between align-items-center'>
+                <div className='px-4 fs-3'>Задачи</div>
+                <button
+                    type='button'
+                    className='btn btn-primary mb-2 mt-3'
+                    onClick={() => setModal(1)}
+                >Создать</button>
+            </div>
+            <div className='d-flex flex-column'>
+                <ul className="list-group">
+                    <TodoItem empty={true} itemId={0}/>
+                </ul>
+            </div>
+        </div>
+    )
 
     return (
         <div className={"p-2 content mx-3 rounded-3 mt-2 " + cl.todoList}>

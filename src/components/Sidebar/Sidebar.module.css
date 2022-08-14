@@ -31,13 +31,9 @@ a, a:hover, a:focus {
     background: #6879c2;
 }
 
-#sidebar ul.components {
+.ulComponents {
     padding: 20px 0;
-}
-
-#sidebar ul p {
     color: #fff;
-    padding: 10px;
 }
 
 #sidebar ul li a {
@@ -60,9 +56,8 @@ ul ul a {
     background: #6879c2;
 }
 
-.sidebar-toggle {
+.sidebarToggle {
     display: block;
-    box-sizing: content-box;
     width: 32px;
     height: 32px;
     padding-left: 233px;
