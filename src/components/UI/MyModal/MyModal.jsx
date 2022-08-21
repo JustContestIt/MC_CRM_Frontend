@@ -1,7 +1,7 @@
 import React from 'react';
 import cl from './MyModal.module.css';
 
-const MyModal = ({children, visible, setVisible, setItem}) => {
+const MyModal = ({children, visible, setVisible}) => {
 
     const rootClasses = [cl.myModal];
     if (visible !== 0) {
@@ -11,7 +11,6 @@ const MyModal = ({children, visible, setVisible, setItem}) => {
     return (
         <div className={rootClasses.join(' ')} onClick={() => {
             setVisible(0)
-            setItem.setNewItem(setItem.newItemExample)
         }}>
             <div className={cl.myModalContent} onClick={(e) => e.stopPropagation()}>
                 {children}

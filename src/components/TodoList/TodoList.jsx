@@ -32,7 +32,7 @@ const TodoList = ({items, setItems}) => {
 
     function createItem() {
         if(!newItem || newItem.title === "") {
-            alert("Введено пустое название задачи");
+            alert("Введено пустое название");
             return;
         }
         setEmptyList(false)
@@ -83,7 +83,7 @@ const TodoList = ({items, setItems}) => {
 
     if (items.length === 0) return (
         <div className={"p-2 content mx-3 rounded-3 mt-2 " + cl.todoList}>
-            <MyModal visible={modal} setVisible={setModal} setItem={newItemForm}>
+            <MyModal visible={modal} setVisible={setModal}>
                 <TodoForm newItemForm={newItemForm} itemCU={TodoItemCU} modal={modal}/>
             </MyModal>
             <div className='d-flex justify-content-between align-items-center'>
@@ -103,7 +103,7 @@ const TodoList = ({items, setItems}) => {
     )
 
     return (
-        <div className={"p-2 content mx-3 rounded-3 mt-2 " + cl.todoList}>
+        <div className={"p-2 mx-3 rounded-3 mt-2 " + cl.todoList}>
             <MyModal visible={modal} setVisible={setModal} setItem={newItemForm}>
                 <TodoForm newItemForm={newItemForm} itemCU={TodoItemCU} modal={modal}/>
             </MyModal>

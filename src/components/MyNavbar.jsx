@@ -1,18 +1,12 @@
 import React from 'react';
 import Sidebar from "./Sidebar/Sidebar";
-import Topbar from "./Topbar/Topbar";
 
-const MyNavbar = ({children, navbarStatus}) => {
+const MyNavbar = ({children}) => {
 
     return (
-        <div className='wrapper'>
-            <Sidebar btnActive={navbarStatus.btnActive}/>
-            <div className="d-flex flex-column wrapper">
-                <Topbar username={navbarStatus.profile[0]?.name} title={navbarStatus.title}/>
-                <div className='overflowHide'>
-                    {children}
-                </div>
-            </div>
+        <div className={'d-flex w-100'}>
+            <Sidebar/>
+            {children}
         </div>
     );
 };

@@ -1,78 +1,44 @@
 import React from "react";
-import 'bootstrap/dist/css/bootstrap.css';
-import './styles/App.css';
-import Login from "./pages/Login";
-import Main from "./pages/Main";
+import {useEffect, useState} from "react";
+import {AuthContext} from "./context/auth";
+import AppRouter from "./components/AppRouter";
 import {useFetching} from "./hooks/useFetching";
 import ProfileService from "./API/ProfileService";
-import {useEffect, useState} from "react";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import MyNavbar from "./components/MyNavbar";
-import Spinner from "./components/UI/Spinner/Spinner";
 import Profile from "./pages/Profile";
-import NotFound from "./pages/NotFound";
-import {AuthContext} from "./context/auth";
+import {ProfileContext} from "./context/profile";
+import Spinner from "./components/UI/Spinner/Spinner";
+import {useNavigate} from "react-router-dom";
 
 function App() {
 
-    const [profile, setProfile] = useState([])
     const [isAuth, setIsAuth] = useState(false)
-    const [navbarStatus, setNavbarStatus] = useState({
-        title: '',
-        btnActive: 0,
-        profile
+    const [profile, setProfile] = useState([])
+    let navigate = useNavigate()
+
+    const [fetchProfile, isLoading, profileError] = useFetching(async () => {
+        const profile = await ProfileService.getProfile();
+        setProfile(profile.data)
+        console.log('Profile error "' + profileError + '"')
     })
 
     useEffect(() => {
         fetchProfile()
+        console.log('Profile in App "' + profile + '"')
+        console.log('LS in App "' + localStorage.getItem('auth') + '"')
+        if (localStorage.getItem('auth')) {
+            setIsAuth(true)
+            // navigate('/')
+        }
+        console.log('isAuth in App "' + isAuth + '"')
     }, [])
 
-    const [fetchProfile, isLoading, profileError] = useFetching(async () => {
-        const profile = await ProfileService.getProfile()
-        if (!profile) setProfile([{
-            name: 'Just Contest It',
-            email: 'just@contest.it',
-            username: 'JCI'
-        }])
-        else setProfile(profile.data)
-    })
-
-
     return (
-        <AuthContext.Provider value={{
-            isAuth,
-            setIsAuth
-        }}>
-            <BrowserRouter>
+        <AuthContext.Provider value={{isAuth, setIsAuth}}>
+            <ProfileContext.Provider value={profile}>
                 <Spinner isLoading={isLoading}>
-                    <div className="App">
-                        <MyNavbar navbarStatus={navbarStatus}>
-                            <Routes>
-                                <Route
-                                    path='/main'
-                                    element={<Main navbarStatus={navbarStatus} setNavbarStatus={setNavbarStatus}/>}
-                                />
-                                <Route
-                                    path='/profile'
-                                    element={<Profile navbarStatus={navbarStatus} setNavbarStatus={setNavbarStatus}/>
-                                }/>
-                                <Route
-                                    path='/error'
-                                    element={<NotFound/>}
-                                />
-                                <Route
-                                    path='*'
-                                    element={<NotFound/>}
-                                />
-                                <Route
-                                    path='/login'
-                                    element={<Login/>}
-                                />
-                            </Routes>
-                        </MyNavbar>
-                    </div>
+                    <AppRouter/>
                 </Spinner>
-            </BrowserRouter>
+            </ProfileContext.Provider>
         </AuthContext.Provider>
   );
 }

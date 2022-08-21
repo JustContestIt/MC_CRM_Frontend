@@ -1,38 +1,51 @@
-import React from 'react';
-import {useState} from "react";
-// import {Link} from "react-router-dom";
-import ListItem from "../UI/ListItem/ListItem";
-import ButtonArrow from "../UI/ButtonArrow/ButtonArrow";
-import cl from './Sidebar.module.css';
+import React, { useState } from 'react';
+import { FaBars }from "react-icons/fa";
+import { NavLink } from 'react-router-dom';
+import { FiLogIn } from "react-icons/fi";
+import { IoIosKeypad } from "react-icons/io";
+import { CgProfile } from "react-icons/cg";
+import logoLarge from '../img/MnC_logo_large.png';
 
-const Sidebar = ({btnActive}) => {
 
-    const [sidebarStatus, setSidebarStatus] = useState("");
-
-    function makeComponentActive(){
-        if(sidebarStatus === "active") setSidebarStatus("")
-        else setSidebarStatus("active")
-    }
-
+const Sidebar = () => {
+    const[isOpen ,setIsOpen] = useState(false);
+    const toggle = () => setIsOpen (!isOpen);
+    const menuItem=[
+        {
+            path:"/",
+            name:"Главная",
+            icon:<IoIosKeypad/>
+        },
+        {
+            path:"/profile",
+            name:"Профиль",
+            icon:<CgProfile/>
+        },
+        {
+            path:"/login",
+            name:"Login",
+            icon:<FiLogIn/>
+        }
+    ]
     return (
-        <nav className={sidebarStatus} id='sidebar'>
-            <div className="sidebar-header">
-                <h1>M&C</h1>
-            </div>
-            <div className={"container-fluid " + cl.sidebarToggle} onClick={makeComponentActive}>
-                <div className="btn-outline-secondary btn-rounded">
-                    <ButtonArrow sidebarStatus={sidebarStatus}/>
+        <div style={{width: isOpen ? "200px" : "50px"}} className="sidebar">
+            <div className="top_section">
+                <div style={{display: isOpen ? "block" : "none"}}>
+                    <img className={'sidebar-image'} src={logoLarge} alt={'Logo'}/>
+                </div>
+                <div style={{marginLeft: isOpen ? "20px" : "0px", marginRight: isOpen ? "30px" : "0px"}} className="bars">
+                    <FaBars onClick={toggle}/>
                 </div>
             </div>
-            <ul className={cl.ulComponents}>
-                <ListItem styles={''}>
-                    <a href={'#'}>Главная</a>
-                </ListItem>
-                <ListItem styles={'active'}>
-                    <a href={'#'}>Группы</a>
-                </ListItem>
-            </ul>
-        </nav>
+            {
+                menuItem.map((item, index)=>(
+                    <NavLink to={item.path} key={index} className="navLink">
+                        <div className="icon">{item.icon}</div>
+                        <div style={{display: isOpen ? "block" : "none"}} className="link_text">{item.name}</div>
+                    </NavLink>
+                ))
+            }
+        </div>
     );
 };
 

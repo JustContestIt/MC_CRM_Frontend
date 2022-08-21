@@ -3,8 +3,9 @@ import TodoList from "../components/TodoList/TodoList";
 import {useFetching} from "../hooks/useFetching";
 import TodoService from "../API/TodoService";
 import Spinner from "../components/UI/Spinner/Spinner";
+import Topbar from "../components/Topbar/Topbar";
 
-const Main = ({navbarStatus, setNavbarStatus}) => {
+const Main = ({profile}) => {
 
     const [items, setItems] = useState([]);
     const [fetchTodo, isLoading, todoError] = useFetching(async () => {
@@ -14,19 +15,16 @@ const Main = ({navbarStatus, setNavbarStatus}) => {
 
     useEffect(() => {
         fetchTodo()
-        setNavbarStatus({
-            title: 'Главная',
-            btnActive: 1,
-            profile: navbarStatus.profile
-        })
     }, [])
 
     return (
-        <Spinner isLoading={isLoading}>
-            <div>
-                <TodoList items={items} setItems={setItems}/>
-            </div>
-        </Spinner>
+            <Topbar profile={profile} title={'Главная'}>
+                <Spinner isLoading={isLoading}>
+                    <div>
+                        <TodoList items={items} setItems={setItems}/>
+                    </div>
+                </Spinner>
+            </Topbar>
     );
 };
 
