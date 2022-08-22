@@ -11,7 +11,7 @@ const Spinner = ({isLoading, children}) => {
                         <div className={cl.loader}/>
                     </div>
                 </FadeInOut>
-                : <div>{children}</div>
+                : <>{children}</>
             }
         </div>
     )

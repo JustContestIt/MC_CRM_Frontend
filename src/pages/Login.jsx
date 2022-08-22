@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import logoSmall from '../components/img/MnC_logo_small.png';
-import {AuthContext} from "../context/auth";
+import {AuthContext} from "../context/authContext";
 import { useNavigate } from "react-router-dom";
 
 const Login = ({profile}) => {
@@ -15,7 +15,7 @@ const Login = ({profile}) => {
         console.log('isAuth in Login "' + isAuth + '"')
         console.log('Profile in Login "' + profile + '"')
         console.log('LS in Login "' + localStorage.getItem('auth') + '"')
-        if ((username === profile[0].username && pass === '') || isAuth) {
+        if (username === profile[0].username && pass === '') {
             setIsAuth(true)
             localStorage.setItem('auth', 'true')
             navigate('/')

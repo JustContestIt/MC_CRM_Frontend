@@ -1,9 +1,9 @@
-import {Outlet, Navigate} from "react-router-dom";
+import {Outlet, Navigate, Route} from "react-router-dom";
 import MyNavbar from "../components/MyNavbar";
 import {useContext} from "react";
-import {AuthContext} from "../context/auth";
+import {AuthContext} from "../context/authContext";
 
-const PrivateRoutes = () => {
+const PrivateRoutes = ({profile}) => {
 
     const {isAuth} = useContext(AuthContext)
 

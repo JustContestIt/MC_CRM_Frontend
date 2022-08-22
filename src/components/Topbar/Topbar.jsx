@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
 import cl from './Topbar.module.css';
-import {AuthContext} from "../../context/auth";
+import {AuthContext} from "../../context/authContext";
 
 const Topbar = ({children, profile, title}) => {
 

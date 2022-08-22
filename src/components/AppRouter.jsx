@@ -5,7 +5,8 @@ import Main from "../pages/Main";
 import Profile from "../pages/Profile";
 import NotFound from "../pages/NotFound";
 import Login from "../pages/Login";
-import {ProfileContext} from "../context/profile";
+import {ProfileContext} from "../context/profileContext";
+import PublicRoutes from "../utils/PublicRoutes";
 
 const AppRouter = () => {
 
@@ -14,11 +15,7 @@ const AppRouter = () => {
     return (
         <div className="App">
             <Routes>
-                <Route element={<PrivateRoutes />}>
-                    <Route
-                        path={'*'}
-                        element={<Navigate to={'/error'}/>}
-                    />
+                <Route element={<PrivateRoutes profile={profile} />}>
                     <Route
                         path={'/'}
                         element={<Main profile={profile}/>}
@@ -27,12 +24,13 @@ const AppRouter = () => {
                         path={'/profile'}
                         element={<Profile profile={profile}/>}
                     />
+                </Route>
+                <Route element={<PublicRoutes/>}>
                     <Route
-                        path={'/error'}
-                        element={<NotFound/>}
+                        path={'/login'}
+                        element={<Login profile={profile}/> }
                     />
                 </Route>
-                <Route path={'/login'} element={<Login profile={profile}/>}/>
             </Routes>
         </div>
     );

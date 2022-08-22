@@ -1,11 +1,11 @@
 import React from "react";
 import {useEffect, useState} from "react";
-import {AuthContext} from "./context/auth";
+import {AuthContext} from "./context/authContext";
 import AppRouter from "./components/AppRouter";
 import {useFetching} from "./hooks/useFetching";
 import ProfileService from "./API/ProfileService";
 import Profile from "./pages/Profile";
-import {ProfileContext} from "./context/profile";
+import {ProfileContext} from "./context/profileContext";
 import Spinner from "./components/UI/Spinner/Spinner";
 import {useNavigate} from "react-router-dom";
 
@@ -18,18 +18,18 @@ function App() {
     const [fetchProfile, isLoading, profileError] = useFetching(async () => {
         const profile = await ProfileService.getProfile();
         setProfile(profile.data)
+        if (localStorage.getItem('auth')) {
+            setIsAuth(true)
+            // navigate('/')
+        }
         console.log('Profile error "' + profileError + '"')
     })
 
     useEffect(() => {
         fetchProfile()
-        console.log('Profile in App "' + profile + '"')
         console.log('LS in App "' + localStorage.getItem('auth') + '"')
-        if (localStorage.getItem('auth')) {
-            setIsAuth(true)
-            // navigate('/')
-        }
         console.log('isAuth in App "' + isAuth + '"')
+        console.log('Profile in App "' + profile + '"')
     }, [])
 
     return (
