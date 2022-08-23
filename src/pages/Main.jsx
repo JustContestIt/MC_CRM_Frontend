@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import TodoList from "../components/TodoList/TodoList";
 import {useFetching} from "../hooks/useFetching";
-import TodoService from "../API/TodoService";
+import TodoService from "../service/TodoService";
 import Spinner from "../components/UI/Spinner/Spinner";
 import Topbar from "../components/Topbar/Topbar";
 

@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {AuthContext} from "./context/authContext";
 import AppRouter from "./components/AppRouter";
 import {useFetching} from "./hooks/useFetching";
-import ProfileService from "./API/ProfileService";
+import ProfileService from "./service/ProfileService";
 import Profile from "./pages/Profile";
 import {ProfileContext} from "./context/profileContext";
 import Spinner from "./components/UI/Spinner/Spinner";
