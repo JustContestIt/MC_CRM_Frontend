@@ -1,11 +1,13 @@
 import React from 'react';
 import Sidebar from "../components/Sidebar/Sidebar";
+import Topbar from "../components/Topbar/Topbar";
 
 const NotFound = () => {
     return (
-        <div className={'d-flex'}>
+        <div className={'w-100'}>
             {/*<Sidebar/>*/}
-            <div className='login d-flex justify-content-center align-items-center w-100 overflow-hidden'>
+            <Topbar />
+            <div className='d-flex justify-content-center align-items-center w-100 overflow-hidden'>
                 <h1>Неправильный URL</h1>
             </div>
         </div>

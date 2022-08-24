@@ -2,15 +2,11 @@ import React, {useContext} from 'react';
 import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
 import cl from './Topbar.module.css';
 import {AuthContext} from "../../context/authContext";
+import {StoreContext} from "../../index";
 
-const Topbar = ({children, profile, title}) => {
+const Topbar = ({children, title}) => {
 
-    const {isAuth, setIsAuth} = useContext(AuthContext)
-
-    const logout = () => {
-        setIsAuth(false)
-        localStorage.removeItem('auth')
-    }
+    const {store} = useContext(StoreContext)
 
     return (
         <div className="d-flex flex-column m-1 w-100">
@@ -21,11 +17,11 @@ const Topbar = ({children, profile, title}) => {
                         <Nav>
                             <NavDropdown
                                 id="nav-dropdown-light"
-                                title={profile[0]?.name}
+                                title={store.user.email}
                                 menuVariant="light"
                             >
                                 <NavDropdown.Item href='/profile'>Профиль</NavDropdown.Item>
-                                <NavDropdown.Item href='/login' onClick={logout}>
+                                <NavDropdown.Item href='/login'>
                                     Выход
                                 </NavDropdown.Item>
                             </NavDropdown>

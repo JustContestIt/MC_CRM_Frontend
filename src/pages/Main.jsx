@@ -5,7 +5,7 @@ import TodoService from "../service/TodoService";
 import Spinner from "../components/UI/Spinner/Spinner";
 import Topbar from "../components/Topbar/Topbar";
 
-const Main = ({profile}) => {
+const Main = () => {
 
     const [items, setItems] = useState([]);
     const [fetchTodo, isLoading, todoError] = useFetching(async () => {
@@ -18,7 +18,7 @@ const Main = ({profile}) => {
     }, [])
 
     return (
-            <Topbar profile={profile} title={'Главная'}>
+            <Topbar title={'Главная'}>
                 <Spinner isLoading={isLoading}>
                     <div>
                         <TodoList items={items} setItems={setItems}/>
