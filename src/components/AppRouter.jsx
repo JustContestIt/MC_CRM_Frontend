@@ -1,36 +1,38 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
-import PrivateRoutes from "../utils/PrivateRoutes";
 import Main from "../pages/Main";
 import Profile from "../pages/Profile";
-import NotFound from "../pages/NotFound";
 import Login from "../pages/Login";
 import {ProfileContext} from "../context/profileContext";
-import PublicRoutes from "../utils/PublicRoutes";
+import {Context} from "../index";
 
 const AppRouter = () => {
 
     const profile = useContext(ProfileContext)
+    const {store} = useContext(Context)
+
+    if (!store.isAuth) {
+        return (
+            <div className="App">
+                <Routes>
+                    <Route path={'/login'} element={<Login profile={profile} />} />
+                    <Route path={'*'} element={<Navigate to={'/login'} />} />
+                </Routes>
+            </div>
+        )
+    }
 
     return (
         <div className="App">
             <Routes>
-                <Route element={<PrivateRoutes profile={profile} />}>
-                    <Route
-                        path={'/'}
-                        element={<Main profile={profile}/>}
-                    />
-                    <Route
-                        path={'/profile'}
-                        element={<Profile profile={profile}/>}
-                    />
-                </Route>
-                <Route element={<PublicRoutes/>}>
-                    <Route
-                        path={'/login'}
-                        element={<Login profile={profile}/> }
-                    />
-                </Route>
+                <Route
+                    path={'/'}
+                    element={<Main profile={profile}/>}
+                />
+                <Route
+                    path={'/profile'}
+                    element={<Profile profile={profile}/>}
+                />
             </Routes>
         </div>
     );

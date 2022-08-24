@@ -2,20 +2,20 @@ import React, {useContext, useState} from 'react';
 import logoSmall from '../components/img/MnC_logo_small.png';
 import {AuthContext} from "../context/authContext";
 import { useNavigate } from "react-router-dom";
+import {Context} from "../index";
+import {observer} from "mobx-react-lite";
 
 const Login = ({profile}) => {
 
+    const {store} = useContext(Context)
     const {isAuth, setIsAuth} = useContext(AuthContext)
     const navigate = useNavigate()
-    const [username, setUsername] = useState('')
-    const [pass, setPass] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     const login = async (event) => {
         event.preventDefault()
-        console.log('isAuth in Login "' + isAuth + '"')
-        console.log('Profile in Login "' + profile + '"')
-        console.log('LS in Login "' + localStorage.getItem('auth') + '"')
-        if (username === profile[0].username && pass === '') {
+        if (email === profile[0].email && password === '') {
             setIsAuth(true)
             localStorage.setItem('auth', 'true')
             navigate('/')
@@ -40,8 +40,8 @@ const Login = ({profile}) => {
                                     <input
                                         type='text'
                                         className='form-control'
-                                        value={username}
-                                        onChange={e => setUsername(e.target.value)}
+                                        value={email}
+                                        onChange={e => setEmail(e.target.value)}
                                     />
                                 </div>
                                 <div className="form-group mb-3">
@@ -51,8 +51,8 @@ const Login = ({profile}) => {
                                     <input
                                         type='password'
                                         className='form-control'
-                                        value={pass}
-                                        onChange={e => setPass(e.target.value)}
+                                        value={password}
+                                        onChange={e => setPassword(e.target.value)}
                                     />
                                 </div>
                                 {/*<div className="form-group mb-3">*/}
@@ -61,7 +61,12 @@ const Login = ({profile}) => {
                                 {/*        Запомнить меня*/}
                                 {/*    </label>*/}
                                 {/*</div>*/}
-                                <button className='btn btn-primary'>Вход</button>
+                                <button className='btn btn-primary' onClick={() => store.login(email, password)}>
+                                    Вход
+                                </button>
+                                <button className='btn btn-primary' onClick={() => store.registration(email, password)}>
+                                    Регистрация
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -71,4 +76,4 @@ const Login = ({profile}) => {
     );
 };
 
-export default Login;
+export default observer(Login);

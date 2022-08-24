@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import {useEffect, useState} from "react";
 import {AuthContext} from "./context/authContext";
 import AppRouter from "./components/AppRouter";
@@ -8,34 +8,34 @@ import Profile from "./pages/Profile";
 import {ProfileContext} from "./context/profileContext";
 import Spinner from "./components/UI/Spinner/Spinner";
 import {useNavigate} from "react-router-dom";
+import {Context} from "./index";
+import {observer} from "mobx-react-lite";
 
 function App() {
 
     const [isAuth, setIsAuth] = useState(false)
+    const {store} = useContext(Context)
     const [profile, setProfile] = useState([])
-    let navigate = useNavigate()
+    // let navigate = useNavigate()
 
-    const [fetchProfile, isLoading, profileError] = useFetching(async () => {
+    const [fetchProfile, isLoadingProfile, profileError] = useFetching(async () => {
         const profile = await ProfileService.getProfile();
         setProfile(profile.data)
-        if (localStorage.getItem('auth')) {
-            setIsAuth(true)
-            // navigate('/')
-        }
-        console.log('Profile error "' + profileError + '"')
+        if (profileError) console.log('Profile error "' + profileError + '"')
     })
 
     useEffect(() => {
+        console.log(store.isAuth)
         fetchProfile()
-        console.log('LS in App "' + localStorage.getItem('auth') + '"')
-        console.log('isAuth in App "' + isAuth + '"')
-        console.log('Profile in App "' + profile + '"')
+        if (localStorage.getItem('token')) {
+            store.checkAuth()
+        }
     }, [])
 
     return (
         <AuthContext.Provider value={{isAuth, setIsAuth}}>
             <ProfileContext.Provider value={profile}>
-                <Spinner isLoading={isLoading}>
+                <Spinner isLoading={store.isLoading}>
                     <AppRouter/>
                 </Spinner>
             </ProfileContext.Provider>
@@ -43,4 +43,4 @@ function App() {
   );
 }
 
-export default App;
+export default observer(App);
