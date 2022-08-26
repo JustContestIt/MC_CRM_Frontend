@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { FaBars }from "react-icons/fa";
+import { FaBars, FaChalkboardTeacher }from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 import { FiLogIn } from "react-icons/fi";
+import { MdOutlineAppRegistration } from "react-icons/md"
 import { IoIosKeypad } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
+import { TbSofa } from "react-icons/tb"
 import logoLarge from '../img/MnC_logo_large.png';
+import {RiAdminLine} from "react-icons/ri";
 
 
 const Sidebar = () => {
@@ -12,19 +15,39 @@ const Sidebar = () => {
     const toggle = () => setIsOpen (!isOpen);
     const menuItem=[
         {
-            path:"/",
-            name:"Главная",
-            icon:<IoIosKeypad/>
+            path: "/",
+            name: "Главная",
+            icon: <IoIosKeypad/>
         },
         {
-            path:"/profile",
-            name:"Профиль",
-            icon:<CgProfile/>
+            path: "/admin",
+            name: "Админ",
+            icon: <RiAdminLine/>
         },
         {
-            path:"/login",
-            name:"Login",
-            icon:<FiLogIn/>
+            path: "/teacher",
+            name: "Тренер",
+            icon: <FaChalkboardTeacher/>
+        },
+        {
+            path: "/profile",
+            name: "Профиль",
+            icon: <CgProfile/>
+        },
+        {
+            path: "/lounge",
+            name: "Тренера и Админ",
+            icon: <TbSofa/>
+        },
+        {
+            path: "/login",
+            name: "Вход",
+            icon: <FiLogIn/>
+        },
+        {
+            path: "/register",
+            name: "Регистрация",
+            icon: <MdOutlineAppRegistration/>
         }
     ]
     return (
@@ -39,7 +62,7 @@ const Sidebar = () => {
             </div>
             {
                 menuItem.map((item, index)=>(
-                    <NavLink to={item.path} key={index} className="navLink">
+                    <NavLink to={item.path} key={index} className="sidebarLink">
                         <div className="icon">{item.icon}</div>
                         <div style={{display: isOpen ? "block" : "none"}} className="link_text">{item.name}</div>
                     </NavLink>

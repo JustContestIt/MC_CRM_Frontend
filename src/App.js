@@ -1,46 +1,61 @@
-import React, {useContext} from "react";
-import {useEffect, useState} from "react";
-import {AuthContext} from "./context/authContext";
-import AppRouter from "./components/AppRouter";
-import {useFetching} from "./hooks/useFetching";
-import ProfileService from "./service/ProfileService";
+import React from "react";
+import {Route, Routes} from "react-router-dom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Layout from "./components/Layout";
+import NotFound from "./pages/NotFound";
+import RequireAuth from "./components/RequireAuth";
+import Unauthorized from "./pages/Unauthorized";
+import WaitingLogin from "./components/WaitingLogin";
+import Main from "./pages/Main";
+import Teacher from "./pages/Teacher";
+import Admin from "./pages/Admin";
+import Lounge from "./pages/Lounge";
+import LinkPage from "./pages/LinkPage";
 import Profile from "./pages/Profile";
-import {ProfileContext} from "./context/profileContext";
-import Spinner from "./components/UI/Spinner/Spinner";
-import {useNavigate} from "react-router-dom";
-import {Context} from "./index";
-import {observer} from "mobx-react-lite";
 
 function App() {
 
-    const [isAuth, setIsAuth] = useState(false)
-    const {store} = useContext(Context)
-    const [profile, setProfile] = useState([])
-    // let navigate = useNavigate()
-
-    const [fetchProfile, isLoadingProfile, profileError] = useFetching(async () => {
-        const profile = await ProfileService.getProfile();
-        setProfile(profile.data)
-        if (profileError) console.log('Profile error "' + profileError + '"')
-    })
-
-    useEffect(() => {
-        console.log(store.isAuth)
-        fetchProfile()
-        if (localStorage.getItem('token')) {
-            store.checkAuth()
-        }
-    }, [])
+    const ROLES = {
+        "Admin": 3,
+        "Teacher": 2,
+        "Student": 1
+    }
 
     return (
-        <AuthContext.Provider value={{isAuth, setIsAuth}}>
-            <ProfileContext.Provider value={profile}>
-                <Spinner isLoading={store.isLoading}>
-                    <AppRouter/>
-                </Spinner>
-            </ProfileContext.Provider>
-        </AuthContext.Provider>
+        <Routes>
+            <Route path="/" element={<Layout />}>
+                <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
+                <Route path="linkpage" element={<LinkPage />} />
+                <Route path="unauthorized" element={<Unauthorized />} />
+
+                <Route element={<WaitingLogin />}>
+                    <Route element={<RequireAuth allowedRoles={[ROLES.Student]} />}>
+                        <Route path="/" element={<Main />} />
+                    </Route>
+
+                    <Route element={<RequireAuth allowedRoles={[ROLES.Student]} />}>
+                        <Route path="/profile" element={<Profile />} />
+                    </Route>
+
+                    <Route element={<RequireAuth allowedRoles={[ROLES.Teacher, ROLES.Admin]} />}>
+                        <Route path="teacher" element={<Teacher />} />
+                    </Route>
+
+                    <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+                        <Route path="admin" element={<Admin />} />
+                    </Route>
+
+                    <Route element={<RequireAuth allowedRoles={[ROLES.Teacher, ROLES.Admin]} />}>
+                        <Route path="lounge" element={<Lounge />} />
+                    </Route>
+                </Route>
+
+                <Route path="*" element={<NotFound />} />
+            </Route>
+        </Routes>
   );
 }
 
-export default observer(App);
+export default App;

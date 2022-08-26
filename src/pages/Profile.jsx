@@ -1,10 +1,15 @@
-import React, {useContext} from 'react';
 import Topbar from "../components/Topbar/Topbar";
-import {StoreContext} from "../index";
+import useAuth from "../hooks/useAuth";
 
 const Profile = () => {
 
-    const {store} = useContext(StoreContext)
+    const { auth } = useAuth()
+
+    const ROLES = {
+        "Admin": 3,
+        "Teacher": 2,
+        "Student": 1
+    }
 
     return (
         <Topbar title='Профиль'>
@@ -13,9 +18,14 @@ const Profile = () => {
                     <div className='profile-personal-info'>
                         <div className="fs-3 text-start px-4 pt-2">Основная информация</div>
                         <div className='profile-info-text'>
-                            <div className='fs-5'>ФИО: {store.user?.email || ""}</div>
-                            <div>Id: {store.user?.id || ""}</div>
-                            <div>E-mail: {store.user?.email || ""}</div>
+                            <div className='fs-5'>ФИО: {auth.username || auth.user || ""}</div>
+                            <div>Роли: {auth.roles.map(role => {
+                                if (role === ROLES.Admin) return (<span key={role}>Админ</span>)
+                                if (role === ROLES.Teacher) return (<span key={role}>-Тренер-</span>)
+                                if (role === ROLES.Student)  return (<span key={role}>Студент-</span>)
+                                return(<span key={role}></span>)
+                            })}</div>
+                            <div className='text-break'>Ключ: {auth.accessToken || ""}</div>
                         </div>
                     </div>
                 </div>

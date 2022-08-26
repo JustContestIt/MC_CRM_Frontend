@@ -81,26 +81,31 @@ const TodoList = ({items, setItems}) => {
         else if (modalId === 3) deleteItem(item)
     }
 
-    if (items.length === 0) return (
-        <div className={"p-2 content mx-3 rounded-3 mt-2 " + cl.todoList}>
-            <MyModal visible={modal} setVisible={setModal}>
-                <TodoForm newItemForm={newItemForm} itemCU={TodoItemCU} modal={modal}/>
-            </MyModal>
-            <div className='d-flex justify-content-between align-items-center'>
-                <div className='px-4 fs-3'>Задачи</div>
-                <button
-                    type='button'
-                    className='btn btn-primary mb-2 mt-3'
-                    onClick={() => setModal(1)}
-                >Создать</button>
+    if (items.length === 0) {
+        return (
+            <div className={"p-2 content mx-3 rounded-3 mt-2 " + cl.todoList}>
+                <MyModal visible={modal} setVisible={setModal}>
+                    <TodoForm newItemForm={newItemForm} itemCU={TodoItemCU} modal={modal}/>
+                </MyModal>
+                <div className='d-flex justify-content-between align-items-center'>
+                    <div className='px-4 fs-3'>Задачи</div>
+                    <button
+                        type='button'
+                        className='btn btn-primary mb-2 mt-3'
+                        onClick={() => setModal(1)}
+                    >Создать
+                    </button>
+                </div>
+                <div className='d-flex flex-column'>
+                    <ul className="list-group">
+                        <li className={"pb-2 list-group-item rounded-3 mt-2 border " + cl.todoItem}>
+                            <TodoItem empty={true} itemId={0} item={newItem} callTodoForm={callTodoForm}/>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div className='d-flex flex-column'>
-                <ul className="list-group">
-                    <TodoItem empty={true} itemId={0}/>
-                </ul>
-            </div>
-        </div>
-    )
+        )
+    }
 
     return (
         <div className={"p-2 mx-3 rounded-3 mt-2 " + cl.todoList}>
@@ -120,13 +125,14 @@ const TodoList = ({items, setItems}) => {
                     <TodoItem callTodoForm={callTodoForm} item={items} empty={emptyList} itemId={0}/>
                     {items.map(item => {
                         return(
-                            <TodoItem
-                                callTodoForm={callTodoForm}
-                                item={item}
-                                empty={emptyList}
-                                itemId={1}
-                                key={item.id}
-                            />
+                            <li className={"pb-2 list-group-item rounded-3 mt-2 border " + cl.todoItem} key={item.id}>
+                                <TodoItem
+                                    callTodoForm={callTodoForm}
+                                    item={item}
+                                    empty={emptyList}
+                                    itemId={1}
+                                />
+                            </li>
                         )
                         })
                     }

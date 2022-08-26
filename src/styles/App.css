@@ -125,7 +125,7 @@ a, a:hover, a:focus {
     font-size: 25px;
 }
 
-.navLink{
+.sidebarLink{
     display: flex;
     color: #fff;
     padding: 10px 15px;
@@ -133,25 +133,25 @@ a, a:hover, a:focus {
     transition: all 0.5s;
 }
 
-.navLink:hover{
-    background:white;
+.sidebarLink:hover{
     color: #000;
+    background:white;
     transition: all 0.5s;
 }
 
-.navLink:active {
+.sidebarLink:active {
     color: #000;
     background: #fff;
 }
 
-.navLink:focus {
+.sidebarLink:focus {
     color: #000;
     background: #fff;
 }
 
 .active{
-    background: white;
     color: #000;
+    background: white;
 }
 
 .icon, .link_text{
@@ -164,6 +164,56 @@ a, a:hover, a:focus {
     align-items: center;
     width: 100%;
     height: 50vh;
+}
+
+.flexGrow {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    color: limegreen;
+    margin-left: 0.25rem;
+}
+
+.invalid {
+    color: red;
+    margin-left: 0.25rem;
+}
+
+.errMsg {
+    background-color: lightpink;
+    color: firebrick;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 7px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.instructions {
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    background: #000;
+    color: #fff;
+    padding: 0.25rem;
+    position: relative;
+    bottom: -10px;
+}
+
+.instructions > svg {
+    margin-right: 0.25rem;
 }
 
 /*.spinner-enter {*/

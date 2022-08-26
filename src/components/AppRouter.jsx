@@ -1,40 +1,49 @@
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
 import Main from "../pages/Main";
 import Profile from "../pages/Profile";
 import Login from "../pages/Login";
-import {ProfileContext} from "../context/profileContext";
-import {Context} from "../index";
+import {StoreContext} from "../index";
+import NavbarRoute from "../utils/NavbarRoute";
+import NotFound from "../pages/NotFound";
 
 const AppRouter = () => {
 
-    const profile = useContext(ProfileContext)
-    const {store} = useContext(Context)
+    const {store} = useContext(StoreContext)
 
     if (!store.isAuth) {
         return (
-            <div className="App">
-                <Routes>
-                    <Route path={'/login'} element={<Login profile={profile} />} />
-                    <Route path={'*'} element={<Navigate to={'/login'} />} />
-                </Routes>
-            </div>
+            <Routes>
+                <Route path={'/login'} element={<Login/>} />
+                <Route
+                    path={'*'}
+                    element={<Navigate to={'/login'} />}
+                />
+            </Routes>
         )
     }
 
-    return (
-        <div className="App">
-            <Routes>
+    else return (
+        <Routes>
+            <Route element={<NavbarRoute/>}>
                 <Route
                     path={'/'}
-                    element={<Main profile={profile}/>}
+                    element={<Main/>}
                 />
                 <Route
                     path={'/profile'}
-                    element={<Profile profile={profile}/>}
+                    element={<Profile/>}
                 />
-            </Routes>
-        </div>
+                <Route
+                    path={'/login'}
+                    element={<Navigate to={'/'}/> }
+                />
+                <Route
+                    path={'*'}
+                    element={<NotFound />}
+                />
+            </Route>
+        </Routes>
     );
 };
 
