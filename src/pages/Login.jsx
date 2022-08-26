@@ -1,12 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
 import logoSmall from '../components/img/MnC_logo_small.png';
-import {Link, useLocation, useNavigate} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import useInput from "../hooks/useInput";
 import useToggle from "../hooks/useToggle";
 import useAuth from "../hooks/useAuth";
 import axios from '../http/index';
-
-const LOGIN_URL = '/auth';
 
 const Login = () => {
 
@@ -35,7 +33,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(LOGIN_URL,
+            const response = await axios.post("/auth",
                 JSON.stringify({ user, pwd }),
                 {
                     headers: { 'Content-Type': 'application/json' },

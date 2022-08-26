@@ -16,11 +16,9 @@ const WaitingLogin = () => {
         const verifyRefreshToken = async () => {
             try {
                 await refresh();
-            }
-            catch (err) {
+            } catch (err) {
                 console.error(err);
-            }
-            finally {
+            } finally {
                 setIsLoading(false);
             }
         }
