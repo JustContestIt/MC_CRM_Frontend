@@ -51,12 +51,12 @@ const Sidebar = () => {
         }
     ]
     return (
-        <div style={{width: isOpen ? "200px" : "50px"}} className="sidebar">
+        <div style={{width: isOpen ? "50px" : "200px"}} className="sidebar">
             <div className="top_section">
-                <div style={{display: isOpen ? "block" : "none"}}>
+                <div style={{display: isOpen ? "none" : "block"}}>
                     <img className={'sidebar-image'} src={logoLarge} alt={'Logo'}/>
                 </div>
-                <div style={{marginLeft: isOpen ? "20px" : "0px", marginRight: isOpen ? "30px" : "0px"}} className="bars">
+                <div style={{marginLeft: isOpen ? "0px" : "20px", marginRight: isOpen ? "0px" : "30px"}} className="bars">
                     <FaBars onClick={toggle}/>
                 </div>
             </div>
@@ -64,7 +64,7 @@ const Sidebar = () => {
                 menuItem.map((item, index)=>(
                     <NavLink to={item.path} key={index} className="sidebarLink">
                         <div className="icon">{item.icon}</div>
-                        <div style={{display: isOpen ? "block" : "none"}} className="link_text">{item.name}</div>
+                        <div style={{display: isOpen ? "none" : "block"}} className="link_text">{item.name}</div>
                     </NavLink>
                 ))
             }

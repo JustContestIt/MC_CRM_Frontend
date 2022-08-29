@@ -2,11 +2,7 @@ import React, {useState} from 'react';
 
 const TodoForm = ({ newItemForm, itemCU, modal}) => {
 
-    if (modal !== 1 && modal !== 2) return(<div className='d-none'></div>)
-
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [inputValue, setInputValue] = useState(newItemForm.newItem.title)
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [textValue, setTextValue] = useState(newItemForm.newItem.body)
     const btnLabel = ["", "Добавить задачу", "Изменить задачу"]
 
@@ -14,6 +10,8 @@ const TodoForm = ({ newItemForm, itemCU, modal}) => {
         if (modal === 1) itemCU.createItem(newItemForm.newItem)
         else itemCU.updateItem(newItemForm.newItem)
     }
+
+    if (modal !== 1 && modal !== 2) return(<div className='d-none'></div>)
 
     return (
         <div className="input-group d-flex flex-column">

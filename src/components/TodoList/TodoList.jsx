@@ -6,9 +6,7 @@ import MyModal from "../UI/MyModal/MyModal";
 
 const TodoList = ({items, setItems}) => {
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [modal, setModal] = useState(0);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [newItem, setNewItem] = useState({
         id: 0,
         title: "",
@@ -23,7 +21,7 @@ const TodoList = ({items, setItems}) => {
             body:""
         }
     };
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+
     const [emptyList, setEmptyList] = useState(false)
     const TodoItemCU = {
         createItem,
@@ -51,14 +49,18 @@ const TodoList = ({items, setItems}) => {
     }
 
     function deleteItem(oldItem) {
-        const newArray = items.filter(item => item !== oldItem);
-        let id = 0
+        const newArray = items.filter(item => item !== oldItem)
+        if (newArray.length === 0) {
+            setEmptyList(true)
+            return
+        }
+        let id = 1
         newArray.map(item => {
             item.id = id
             id += 1
+            return item
         })
         setItems(newArray);
-        if (newArray.length === 0) setEmptyList(true)
     }
 
     function updateItem() {
@@ -78,33 +80,7 @@ const TodoList = ({items, setItems}) => {
             setNewItem(item)
             setModal(2)
         }
-        else if (modalId === 3) deleteItem(item)
-    }
-
-    if (items.length === 0) {
-        return (
-            <div className={"p-2 content mx-3 rounded-3 mt-2 " + cl.todoList}>
-                <MyModal visible={modal} setVisible={setModal}>
-                    <TodoForm newItemForm={newItemForm} itemCU={TodoItemCU} modal={modal}/>
-                </MyModal>
-                <div className='d-flex justify-content-between align-items-center'>
-                    <div className='px-4 fs-3'>Задачи</div>
-                    <button
-                        type='button'
-                        className='btn btn-primary mb-2 mt-3'
-                        onClick={() => setModal(1)}
-                    >Создать
-                    </button>
-                </div>
-                <div className='d-flex flex-column'>
-                    <ul className="list-group">
-                        <li className={"pb-2 list-group-item rounded-3 mt-2 border " + cl.todoItem}>
-                            <TodoItem empty={true} itemId={0} item={newItem} callTodoForm={callTodoForm}/>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        )
+        else deleteItem(item)
     }
 
     return (
@@ -112,6 +88,9 @@ const TodoList = ({items, setItems}) => {
             <MyModal visible={modal} setVisible={setModal} setItem={newItemForm}>
                 <TodoForm newItemForm={newItemForm} itemCU={TodoItemCU} modal={modal}/>
             </MyModal>
+            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#todoFormExample">
+                Launch demo modal
+            </button>
             <div className='d-flex justify-content-between align-items-center'>
                 <div className='px-4 fs-3'>Задачи</div>
                 <button
@@ -122,15 +101,13 @@ const TodoList = ({items, setItems}) => {
             </div>
             <div className='d-flex flex-column'>
                 <ul className="list-group">
-                    <TodoItem callTodoForm={callTodoForm} item={items} empty={emptyList} itemId={0}/>
                     {items.map(item => {
                         return(
-                            <li className={"pb-2 list-group-item rounded-3 mt-2 border " + cl.todoItem} key={item.id}>
+                            <li className={`pb-2 list-group-item rounded-3 mt-2 border ${cl.todoItem}`} key={item.id}>
                                 <TodoItem
                                     callTodoForm={callTodoForm}
                                     item={item}
                                     empty={emptyList}
-                                    itemId={1}
                                 />
                             </li>
                         )

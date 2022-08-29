@@ -29,6 +29,7 @@ function App() {
                 <Route path="register" element={<Register />} />
                 <Route path="linkpage" element={<LinkPage />} />
                 <Route path="unauthorized" element={<Unauthorized />} />
+                {/*<Route path="/" element={<Main />} />*/}
 
                 <Route element={<WaitingLogin />}>
                     <Route element={<RequireAuth allowedRoles={[ROLES.Student]} />}>
@@ -36,7 +37,7 @@ function App() {
                     </Route>
 
                     <Route element={<RequireAuth allowedRoles={[ROLES.Student]} />}>
-                        <Route path="/profile" element={<Profile />} />
+                        <Route path="profile" element={<Profile />} />
                     </Route>
 
                     <Route element={<RequireAuth allowedRoles={[ROLES.Teacher, ROLES.Admin]} />}>

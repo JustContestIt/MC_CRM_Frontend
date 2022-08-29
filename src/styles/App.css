@@ -90,9 +90,7 @@ a, a:hover, a:focus {
 }
 
 .profile-info-text {
-    margin-left: 40px;
-    margin-top: 10px;
-    margin-bottom: 15px;
+    margin: 10px 40px 15px;
 }
 
 .overflowHide {
