@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom"
+import logo from "../components/img/MnC_logo_small.png"
 
 const NotFound = () => {
     return (
-        <div className='w-100 d-flex flex-column justify-content-center align-items-center'>
+        <div className='notFound'>
+            <img className='notFoundLogo' src={logo} alt='logo'/>
             <h1>Oops!</h1>
             <p>Страница не найдена!</p>
-            <div className="flexGrow">
-                <Link to="/"><button className='btn btn-primary'>Главная страница</button></Link>
-            </div>
+            <Link to="/"><button className='btn btn-primary'>Главная</button></Link>
         </div>
     )
 }

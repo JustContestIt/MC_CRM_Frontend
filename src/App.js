@@ -29,7 +29,6 @@ function App() {
                 <Route path="register" element={<Register />} />
                 <Route path="linkpage" element={<LinkPage />} />
                 <Route path="unauthorized" element={<Unauthorized />} />
-                {/*<Route path="/" element={<Main />} />*/}
 
                 <Route element={<WaitingLogin />}>
                     <Route element={<RequireAuth allowedRoles={[ROLES.Student]} />}>

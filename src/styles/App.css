@@ -163,13 +163,6 @@ a, a:hover, a:focus {
     height: 50vh;
 }
 
-.flexGrow {
-    flex-grow: 1;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-end;
-}
-
 .offscreen {
     position: absolute;
     left: -9999px;
@@ -211,6 +204,20 @@ a, a:hover, a:focus {
 
 .instructions > svg {
     margin-right: 0.25rem;
+}
+
+.notFound {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+}
+
+.notFoundLogo {
+    margin-right: 30px;
+    scale: 80%;
 }
 
 /*.spinner-enter {*/

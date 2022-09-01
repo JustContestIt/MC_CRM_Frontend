@@ -1,50 +1,72 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import TodoItem from "./TodoItem/TodoItem";
 import cl from './TodoList.module.css';
 import TodoForm from "./TodoForm/TodoForm";
 import MyModal from "../UI/MyModal/MyModal";
+import {useFetching} from "../../hooks/useFetching";
+import TodoService from "../../service/TodoService";
+import Spinner from "../UI/Spinner/Spinner";
 
-const TodoList = ({items, setItems}) => {
+const TodoList = () => {
+
+    const [items, setItems] = useState([]);
 
     const [modal, setModal] = useState(0);
+
     const [newItem, setNewItem] = useState({
         id: 0,
         title: "",
         body: ""
     });
+
+    const emptyItem = {
+        id: 0,
+        title: "",
+        body: ""
+    }
+
+    const zeroItems = [{
+        id: 0,
+        title: "Задач нет",
+        body: ""
+    }]
+
     const newItemForm = {
         newItem,
         setNewItem,
-        newItemExample: {
-            id: 0,
-            title: "",
-            body:""
-        }
-    };
+        createItem,
+        updateItem,
+        modal
+    }
 
     const [emptyList, setEmptyList] = useState(false)
-    const TodoItemCU = {
-        createItem,
-        updateItem
-    }
+
+    const [fetchTodo, isLoading, todoError] = useFetching(async () => {
+        const response = await TodoService.getTodo()
+        setItems(response.data)
+        if (todoError) console.log(`This is todoError "${todoError}"`)
+    })
+
+    useEffect(() => {
+        fetchTodo()
+    }, [])
 
     function createItem() {
         if(!newItem || newItem.title === "") {
             alert("Введено пустое название");
             return;
         }
+        let newId = 1
+        if (items[0].title === zeroItems[0].title) setItems([])
+        else newId = items.length + 1
         setEmptyList(false)
         const item = {
-            id: items.length + 1,
+            id: newId,
             title: newItem.title,
             body: newItem.body
         };
         setItems(oldList => [...oldList, item]);
-        setNewItem({
-            id: 0,
-            title: "",
-            body: ""
-        });
+        setNewItem(emptyItem);
         setModal(0)
     }
 
@@ -52,6 +74,8 @@ const TodoList = ({items, setItems}) => {
         const newArray = items.filter(item => item !== oldItem)
         if (newArray.length === 0) {
             setEmptyList(true)
+            setNewItem(emptyItem);
+            setItems(zeroItems)
             return
         }
         let id = 1
@@ -67,11 +91,7 @@ const TodoList = ({items, setItems}) => {
         const newList = []
         items.map(item => item.id === newItem.id ? newList.push(newItem) : newList.push(item))
         setItems(newList)
-        setNewItem({
-            id: 0,
-            title: "",
-            body: ""
-        });
+        setNewItem(emptyItem);
         setModal(0)
     }
 
@@ -83,14 +103,15 @@ const TodoList = ({items, setItems}) => {
         else deleteItem(item)
     }
 
+    const resetTodoItem = () => {
+        setNewItem(emptyItem)
+    }
+
     return (
-        <div className={"p-2 mx-3 rounded-3 mt-2 " + cl.todoList}>
-            <MyModal visible={modal} setVisible={setModal} setItem={newItemForm}>
-                <TodoForm newItemForm={newItemForm} itemCU={TodoItemCU} modal={modal}/>
+        <Spinner isLoading={isLoading}>
+            <MyModal visible={modal} setVisible={setModal} resetItem={resetTodoItem}>
+                <TodoForm newItemForm={newItemForm}/>
             </MyModal>
-            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#todoFormExample">
-                Launch demo modal
-            </button>
             <div className='d-flex justify-content-between align-items-center'>
                 <div className='px-4 fs-3'>Задачи</div>
                 <button
@@ -99,11 +120,11 @@ const TodoList = ({items, setItems}) => {
                     onClick={() => setModal(1)}
                 >Создать</button>
             </div>
-            <div className='d-flex flex-column'>
+            <div>
                 <ul className="list-group">
                     {items.map(item => {
                         return(
-                            <li className={`pb-2 list-group-item rounded-3 mt-2 border ${cl.todoItem}`} key={item.id}>
+                            <li className={`pb-2 rounded-3 mt-2 border ${cl.todoItem}`} key={item.id}>
                                 <TodoItem
                                     callTodoForm={callTodoForm}
                                     item={item}
@@ -115,7 +136,7 @@ const TodoList = ({items, setItems}) => {
                     }
                 </ul>
             </div>
-        </div>
+        </Spinner>
     );
 };
 
