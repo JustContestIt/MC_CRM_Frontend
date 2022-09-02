@@ -9,7 +9,7 @@ const TodoItem = ({empty, item, callTodoForm}) => {
     return (
         <>
             <div className="d-flex justify-content-start fs-5">{item.id}</div>
-            <div className="my-2 fs-4 text-break text-center" id='todoItem'> {item.title}</div>
+            <div className="my-2 fs-4 text-break text-center"> {item.title}</div>
             <p className="mb-4 fs-6 text-break">{item.body}</p>
             <div className='mt-4 d-flex justify-content-between'>
                 <button

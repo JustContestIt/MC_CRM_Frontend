@@ -4,7 +4,7 @@ const TodoForm = ({ newItemForm }) => {
 
     const [inputValue, setInputValue] = useState("")
     const [textValue, setTextValue] = useState("")
-    const btnLabel = ["Добавить задачу", "Изменить задачу"]
+    const btnLabel = ["Добавить", "Изменить"]
 
     useEffect(() => {
         setInputValue(newItemForm.newItem.title)
@@ -53,14 +53,16 @@ const TodoForm = ({ newItemForm }) => {
                 ></textarea>
             </div>
             <button
-                className="btn btn-primary mb-1 rounded"
+                className="btn btn-primary mb-1 rounded rounded-3"
                 type="button"
                 onClick={() => {
                     setInputValue("")
                     setTextValue("")
                     doCRUD()
                 }}
-            >{btnLabel[newItemForm.modal - 1]}</button>
+            >
+                {btnLabel[newItemForm.modal - 1]}
+            </button>
         </div>
     );
 };

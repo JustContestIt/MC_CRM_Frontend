@@ -1,23 +1,36 @@
-.myModal {
+.overlay {
     position: fixed;
+    visibility: hidden;
+    opacity: 0;
     top: 0;
     bottom: 0;
-    right: 0;
     left: 0;
-    display: none;
-    background: rgba(0, 0, 0, 0.5);
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 0.5s ease;
     z-index: 99;
 }
 
-.myModal.active {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
 }
 
-.myModalContent {
-    padding: 25px;
-    background: white;
-    border-radius: 16px;
-    min-width: 250px;
+.popup {
+    margin: 70px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 30%;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+@media screen and (max-width: 700px){
+    .box{
+        width: 70%;
+    }
+    .popup{
+        width: 70%;
+    }
 }

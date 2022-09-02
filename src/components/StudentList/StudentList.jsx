@@ -1,59 +1,22 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Student from "./Student/Student";
 import cl from './StudentList.module.css';
 import StudentForm from "./StudentForm/StudentForm";
 import MyModal from "../UI/MyModal/MyModal";
+import {useFetching} from "../../hooks/useFetching";
+import TodoService from "../../service/TodoService";
+import StudentService from "../../service/StudentService";
+import Spinner from "../UI/Spinner/Spinner";
 
 const StudentList = () => {
 
-    const [students, setStudents] = useState([
-        {
-            id: 1,
-            fullName: 'Альнур Даленов',
-            username: "JCI1",
-            age: 12,
-            email: "jci@jci.com",
-            phone: "77776665544",
-            groupId: 3,
-            parentPhone: "77774443322"
-        },
-        {
-            id: 2,
-            fullName: 'Станислав Иванов',
-            username: "JCI2",
-            age: 10,
-            email: "jci@jci.com",
-            phone: "77776665544",
-            groupId: 1,
-            parentPhone: "77774443322"
-        },
-        {
-            id: 3,
-            fullName: 'Анна Яценко',
-            username: "JCI3",
-            age: 14,
-            email: "jci@jci.com",
-            phone: "77776665544",
-            groupId: 2,
-            parentPhone: "77774443322"
-        },
-        {
-            id: 4,
-            fullName: 'Анастасия Старченко',
-            username: "JCI4",
-            age: 16,
-            email: "jci@jci.com",
-            phone: "77776665544",
-            groupId: 1,
-            parentPhone: "77774443322"
-        }
-    ]);
+    const [students, setStudents] = useState([]);
 
     const [modal, setModal] = useState(0);
 
     const [newStudent, setNewStudent] = useState({
         id: 0,
-        fullName: '',
+        name: '',
         username: "",
         age: 0,
         email: "",
@@ -64,7 +27,7 @@ const StudentList = () => {
 
     const emptyStudent = {
         id: 0,
-        fullName: '',
+        name: '',
         username: "",
         age: 0,
         email: "",
@@ -75,7 +38,7 @@ const StudentList = () => {
 
     const zeroStudents = [{
         id: 0,
-        fullName: 'Учеников нет',
+        name: 'Студентов нет',
         username: "",
         age: 0,
         email: "",
@@ -84,7 +47,7 @@ const StudentList = () => {
         parentPhone: ""
     }]
 
-    const newItemForm = {
+    const newStudentForm = {
         newStudent,
         setNewStudent,
         createStudent,
@@ -137,7 +100,7 @@ const StudentList = () => {
         setModal(0)
     }
 
-    function callTodoForm(item, modalId) {
+    function callStudentForm(item, modalId) {
         if (modalId === 2) {
             setNewStudent(item)
             setModal(2)
@@ -149,11 +112,21 @@ const StudentList = () => {
         setNewStudent(emptyStudent)
     }
 
+    const [fetchStudents, isLoading, studentError] = useFetching(async () => {
+        const response = await StudentService.getStudents()
+        setStudents(response.data)
+        if (studentError) console.log(`This is todoError "${studentError}"`)
+    })
+
+    useEffect(() => {
+        fetchStudents()
+    }, [])
+
     return (
-        <>
-            <MyModal visible={modal} setVisible={setModal} resetItem={resetStudent}>
-                <StudentForm newItemForm={newItemForm}/>
-            </MyModal>
+        <Spinner isLoading={isLoading}>
+            {/*<MyModal visible={modal} setVisible={setModal} resetItem={resetStudent}>*/}
+            {/*    <StudentForm newStudentForm={newStudentForm}/>*/}
+            {/*</MyModal>*/}
             <div className='d-flex justify-content-between align-items-center'>
                 <div className='px-4 fs-3'>Студенты</div>
                 <button
@@ -168,7 +141,7 @@ const StudentList = () => {
                         return(
                             <li className={`pb-2 rounded-3 mt-2 border ${cl.student}`} key={student.id}>
                                 <Student
-                                    callTodoForm={callTodoForm}
+                                    callStudentForm={callStudentForm}
                                     student={student}
                                     empty={emptyList}
                                 />
@@ -178,7 +151,7 @@ const StudentList = () => {
                     }
                 </ul>
             </div>
-        </>
+        </Spinner>
     );
 };
 

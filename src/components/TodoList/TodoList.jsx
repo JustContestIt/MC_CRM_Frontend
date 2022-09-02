@@ -47,10 +47,6 @@ const TodoList = () => {
         if (todoError) console.log(`This is todoError "${todoError}"`)
     })
 
-    useEffect(() => {
-        fetchTodo()
-    }, [])
-
     function createItem() {
         if(!newItem || newItem.title === "") {
             alert("Введено пустое название");
@@ -106,6 +102,10 @@ const TodoList = () => {
     const resetTodoItem = () => {
         setNewItem(emptyItem)
     }
+
+    useEffect(() => {
+        fetchTodo()
+    }, [])
 
     return (
         <Spinner isLoading={isLoading}>

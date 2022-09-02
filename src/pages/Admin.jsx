@@ -1,17 +1,23 @@
-import { Link } from "react-router-dom";
-import Users from '../components/Users';
+import Topbar from "../components/Topbar/Topbar";
+import StudentList from "../components/StudentList/StudentList";
+import TodoList from "../components/TodoList/TodoList";
+import React from "react";
 
 const Admin = () => {
     return (
-        <section>
-            <h1>Страница Админа</h1>
-            <br />
-            <Users />
-            <br />
-            <div className="flexGrow">
-                <Link to="/">Главная</Link>
+        <Topbar title={'Админка'}>
+            <div className='col-8'>
+                <div className='p-2 mx-3 rounded-5 mt-2 todoList col'>
+                    <StudentList/>
+                </div>
             </div>
-        </section>
+            <div className='col'>
+                <div className='p-2 mx-3 rounded-5 mt-2 studentList col'>
+                    <TodoList/>
+                </div>
+            </div>
+            {/*<Users />*/}
+        </Topbar>
     )
 }
 

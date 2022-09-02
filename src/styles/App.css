@@ -220,17 +220,30 @@ a, a:hover, a:focus {
     scale: 80%;
 }
 
-/*.spinner-enter {*/
-/*    opacity: 0;*/
-/*}*/
-/*.spinner-enter-active {*/
-/*    opacity: 1;*/
-/*    transition: opacity 500ms ease-in;*/
-/*}*/
-/*.spinner-exit {*/
-/*    opacity: 1;*/
-/*}*/
-/*.spinner-exit-active {*/
-/*    opacity: 0;*/
-/*    transition: opacity 500ms ease-in;*/
-/*}*/
+.unAuthorized {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+}
+
+.unAuthorizedLogo {
+    margin-right: 30px;
+    scale: 80%;
+}
+
+.todoList {
+    max-height: 77vh;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    overflow: auto;
+}
+
+.studentList {
+    max-height: 77vh;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    overflow: auto;
+}

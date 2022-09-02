@@ -1,35 +1,48 @@
-import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
 import cl from './Topbar.module.css';
 import useAuth from "../../hooks/useAuth";
 import useLogout from "../../hooks/useLogout";
+import {useEffect, useState} from "react";
+import Icon from "../UI/Icon/Icon";
+import {RiArrowDropDownLine} from "react-icons/ri";
+import {Link} from "react-router-dom";
 
 const Topbar = ({children, title}) => {
 
     const { auth } = useAuth()
 
+    const [topNavToggle, setTopNavToggle] = useState("")
+
+    const toggle = (e) => {
+        e.preventDefault()
+        if (topNavToggle === "") setTopNavToggle(cl.topNav + cl.responsive)
+        else setTopNavToggle(cl.topNav)
+    }
+
+    useEffect(() => {
+        setTopNavToggle(cl.topNav)
+    }, [])
+
     return (
-        <div className="d-flex flex-column m-1 w-100">
-            <Navbar className='my-2' variant="light" expand="lg">
-                <Container fluid>
-                    <Navbar.Brand className={cl.topbarBrand + ' fs-1'}>{title}</Navbar.Brand>
-                    <Navbar id="navbar-light" className={cl.topbarProfile}>
-                        <Nav>
-                            <NavDropdown
-                                id="nav-dropdown-light"
-                                title={auth.username || auth.user || "JCI"}
-                                menuVariant="light"
-                                className='px-4 mx-4'
-                            >
-                                <NavDropdown.Item href='/profile'>Профиль</NavDropdown.Item>
-                                <NavDropdown.Item href='/login' onClick={useLogout}>
-                                    Выход
-                                </NavDropdown.Item>
-                            </NavDropdown>
-                        </Nav>
-                    </Navbar>
-                </Container>
-            </Navbar>
-            <div>
+        <div className="m-1 container-fluid">
+            <div className="row">
+                <div className={topNavToggle}>
+                    <div className={cl.topNavTitle}>{title}</div>
+                    <div className={cl.dropdown}>
+                        <button className={cl.dropBtn}>
+                            <span className='d-flex justify-content-center align-items-center'>
+                                {auth.username || auth.user || "JCI"}
+                                <Icon icon={<RiArrowDropDownLine/>} classes={cl.dropdownIcon}/>
+                            </span>
+                        </button>
+                        <div className={cl.dropdownContent}>
+                            <Link to='/profile' className={cl.linkOne}>Профиль</Link>
+                            <a href='/login' className={cl.linkTwo} onClick={useLogout}>Выйти</a>
+                        </div>
+                    </div>
+                    <a href="#" className={cl.icon} onClick={toggle}>&#9776;</a>
+                </div>
+            </div>
+            <div className='mt-4 row'>
                 {children}
             </div>
         </div>

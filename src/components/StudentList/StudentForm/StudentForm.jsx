@@ -1,22 +1,22 @@
 import React, {useEffect, useState} from 'react';
 
-const TodoForm = ({ newItemForm }) => {
+const TodoForm = ({ newStudentForm }) => {
 
     const [inputValue, setInputValue] = useState("")
     const [textValue, setTextValue] = useState("")
-    const btnLabel = ["Добавить задачу", "Изменить задачу"]
+    const btnLabel = ["Добавить", "Изменить"]
 
     useEffect(() => {
-        setInputValue(newItemForm.newItem.title)
-        setTextValue(newItemForm.newItem.body)
-    }, [newItemForm.modal])
+        setInputValue(newStudentForm.newItem.title)
+        setTextValue(newStudentForm.newItem.body)
+    }, [newStudentForm.modal])
 
     function doCRUD() {
-        if (newItemForm.modal === 1) newItemForm.createItem(newItemForm.newItem)
-        else newItemForm.updateItem(newItemForm.newItem)
+        if (newStudentForm.modal === 1) newStudentForm.createItem(newStudentForm.newItem)
+        else newStudentForm.updateItem(newStudentForm.newItem)
     }
 
-    if (newItemForm.modal !== 1 && newItemForm.modal !== 2) return(<div className='d-none'></div>)
+    if (newStudentForm.modal !== 1 && newStudentForm.modal !== 2) return(<div className='d-none'></div>)
 
     return (
         <div className="input-group d-flex flex-column">
@@ -28,10 +28,10 @@ const TodoForm = ({ newItemForm }) => {
                     value={inputValue}
                     onChange={e => {
                         setInputValue(e.target.value)
-                        newItemForm.setNewItem({
-                            id: newItemForm.newItem.id,
+                        newStudentForm.setNewItem({
+                            id: newStudentForm.newItem.id,
                             title: e.target.value,
-                            body: newItemForm.newItem.body
+                            body: newStudentForm.newItem.body
                         })
                     }}
                 />
@@ -44,9 +44,9 @@ const TodoForm = ({ newItemForm }) => {
                     value={textValue}
                     onChange={e => {
                         setTextValue(e.target.value)
-                        newItemForm.setNewItem({
-                            id: newItemForm.newItem.id,
-                            title: newItemForm.newItem.title,
+                        newStudentForm.setNewItem({
+                            id: newStudentForm.newItem.id,
+                            title: newStudentForm.newItem.title,
                             body: e.target.value
                         })
                     }}
@@ -60,7 +60,7 @@ const TodoForm = ({ newItemForm }) => {
                     setTextValue("")
                     doCRUD()
                 }}
-            >{btnLabel[newItemForm.modal - 1]}</button>
+            >{btnLabel[newStudentForm.modal - 1]}</button>
         </div>
     );
 };

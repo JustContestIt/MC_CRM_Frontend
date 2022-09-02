@@ -1,28 +1,43 @@
-const TodoItem = ({empty, student, callTodoForm}) => {
+const Student = ({empty, student, callStudentForm}) => {
 
     if (empty) {
         return (
-            <div className="my-2 fs-4 text-break text-center">{student.title}</div>
+            <div className="my-2 fs-4 text-break text-center">{student.name}</div>
         )
     }
 
     return (
         <>
-            <div className="d-flex justify-content-start fs-5">{student.id}</div>
-            <div className="my-2 fs-4 text-break text-center" id='todoItem'> {student.title}</div>
-            <p className="mb-4 fs-6 text-break">{student.body}</p>
-            <div className='mt-4 d-flex justify-content-between'>
+            <div className="text-start fs-5">{student.id || 0}</div>
+            <div className='mx-4 d-flex flex-column'>
+                <div className="fs-5">ФИО: {student.name || "JustContestIt"}</div>
+                <div className="fs-5">Группа: {student.company.name || student?.groupId || "Группа 4"}</div>
+                <div className="fs-5 mb-3">Username: {student.username || "JCI"}</div>
+                <div>
+                    <p className="fs-6">Почта: {student.email || ""}</p>
+                    <p className="fs-6">
+                        Адрес:
+                        {
+                            ` ${student.address.city || ""},
+                             ${student.address.street || ""} st., 
+                             ${student.address.suite || ""}`
+                        }
+                    </p>
+                    <p className="fs-6">Телефон: {student.phone || "+77777777777"}</p>
+                </div>
+            </div>
+            <div className='d-flex justify-content-between'>
                 <button
                     type='button'
                     className='btn btn-outline-primary'
-                    onClick={() => callTodoForm(student, 2)}
+                    onClick={() => callStudentForm(student, 2)}
                 >
                     Редактировать
                 </button>
                 <button
                     type='button'
                     className='btn btn-success'
-                    onClick={() => callTodoForm(student, 3)}
+                    onClick={() => callStudentForm(student, 3)}
                 >
                     Сделано
                 </button>
@@ -31,4 +46,4 @@ const TodoItem = ({empty, student, callTodoForm}) => {
     );
 };
 
-export default TodoItem;
+export default Student;

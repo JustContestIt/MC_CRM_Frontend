@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
+import Spinner from "./UI/Spinner/Spinner";
 
 const Users = () => {
     const [users, setUsers] = useState();
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
     const location = useLocation();
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         const getUsers = async () => {
@@ -16,6 +18,8 @@ const Users = () => {
             } catch (err) {
                 console.error(err);
                 navigate('/login', { state: { from: location }, replace: true });
+            } finally {
+                setIsLoading(false)
             }
         }
         getUsers();
@@ -29,7 +33,7 @@ const Users = () => {
                     <ul>
                         {users.map((user, i) => <li key={i}>{user?.username}</li>)}
                     </ul>
-                ) : <p>Нет пользователей для отображения</p>
+                ) : <Spinner isLoading={isLoading}>Нет пользователей для отображения</Spinner>
             }
         </article>
     );
