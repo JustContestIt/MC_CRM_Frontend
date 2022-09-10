@@ -98,60 +98,12 @@ a, a:hover, a:focus {
     overflow-y: hidden;
 }
 
-.sidebar {
-    background: #7386D5;
-    color: #fff;
-    height: 100vh;
-    transition: all 0.3s;
-}
-
-.top_section{
-    display: flex;
-    justify-content: space-evenly;
-    padding: 20px 0;
-}
-
-.sidebar-image {
-    width: 120px;
-    margin-left: 20px;
-}
-
-.bars{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 25px;
-}
-
-.sidebarLink{
-    display: flex;
-    color: #fff;
-    padding: 10px 15px;
-    gap: 15px;
-    transition: all 0.5s;
-}
-
-.sidebarLink:hover{
-    color: #000;
-    background:white;
-}
-
-.sidebarLink:active {
-    color: #000;
-    background: #fff;
-}
-
-.sidebarLink:focus {
-    color: #000;
-    background: #fff;
-}
-
 .active{
     color: #000;
     background: white;
 }
 
-.icon, .link_text{
+.icon{
     font-size: 20px;
 }
 

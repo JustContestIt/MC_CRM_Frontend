@@ -1,65 +1,51 @@
-#sidebar.active {
-    margin-left: -150px;
-}
-
-@media (max-width: 768px) {
-    #sidebar {
-        margin-left: -150px;
-    }
-    #sidebar.active {
-        margin-left: 0;
-    }
-}
-
-a, a:hover, a:focus {
-    color: inherit;
-    text-decoration: none;
-    transition: all 0.3s;
-}
-
-#sidebar {
-    min-width: 250px;
-    max-width: 250px;
-    min-height: 100vh;
+.sidebar {
     background: #7386D5;
     color: #fff;
+    height: 100vh;
     transition: all 0.3s;
 }
 
-#sidebar .sidebar-header {
-    padding: 20px;
-    background: #6879c2;
-}
-
-.ulComponents {
+.top_section{
+    display: flex;
+    justify-content: space-evenly;
     padding: 20px 0;
-    color: #fff;
 }
 
-#sidebar ul li a {
-    padding: 10px;
-    font-size: 1.1em;
-    display: block;
+.sidebarImage {
+    width: 120px;
+    margin-left: 20px;
 }
-#sidebar ul li a:hover {
-    color: #7386D5;
+
+.bars{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+}
+
+.sidebarLink{
+    display: flex;
+    color: #fff;
+    padding: 10px 15px;
+    gap: 15px;
+    transition: all 0.5s;
+}
+
+.sidebarLink:hover{
+    color: #000;
+    background:#fff;
+}
+
+.sidebarLink:active {
+    color: #000;
     background: #fff;
 }
 
-#sidebar ul li.active > a {
-    color: #fff;
-    background: #6879c2;
-}
-ul ul a {
-    font-size: 0.9em !important;
-    padding-left: 30px !important;
-    background: #6879c2;
+.sidebarLink:focus {
+    color: #000;
+    background: #fff;
 }
 
-.sidebarToggle {
-    display: block;
-    width: 32px;
-    height: 32px;
-    padding-left: 233px;
-    margin-top: -16px;
+.link_text {
+    font-size: 20px;
 }

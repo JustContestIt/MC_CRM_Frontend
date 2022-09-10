@@ -1,7 +1,7 @@
 import React from 'react';
 import TodoList from "../components/TodoList/TodoList";
 import Topbar from "../components/Topbar/Topbar";
-import ItemList from "../components/ItemList/ItemList";
+import ItemList from "../components/ItemList";
 import StudentList from "../components/StudentList/StudentList";
 
 const Main = () => {
