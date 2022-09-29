@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import { FaBars, FaChalkboardTeacher }from "react-icons/fa";
+import { FaChalkboardTeacher }from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 import { FiLogIn } from "react-icons/fi";
 import { MdOutlineAppRegistration } from "react-icons/md"
 import { IoIosKeypad } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { TbSofa } from "react-icons/tb"
-import logoLarge from '../img/MnC_logo_large.png';
+import logoText from '../img/logo_text.svg';
+import logo from '../img/logo.svg';
 import {RiAdminLine} from "react-icons/ri";
 import cl from "./Sidebar.module.css"
 import useAuth from "../../hooks/useAuth";
@@ -22,7 +23,6 @@ const Sidebar = () => {
     const [adminFlag, setAdminFlag] = useState(false)
     const [teacherFlag, setTeacherFlag] = useState(false)
     const [isOpen ,setIsOpen] = useState(false);
-    const toggle = () => setIsOpen (!isOpen);
     const menuItem=[
         {
             path: "/",
@@ -66,7 +66,8 @@ const Sidebar = () => {
             roles: [ROLES.Admin],
             icon: <MdOutlineAppRegistration/>
         }
-    ]
+    ];
+    const toggle = () => setIsOpen (!isOpen);
 
     useEffect(() => {
         if (auth.roles.includes(ROLES.Admin)) setAdminFlag(true)
@@ -74,13 +75,25 @@ const Sidebar = () => {
     }, [auth])
 
     return (
-        <div style={{width: isOpen ? "50px" : "200px"}} className={cl.sidebar}>
+        <div style={{width: isOpen ? "98px" : "240px"}} className={cl.sidebar}>
             <div className={cl.top_section}>
-                <div style={{display: isOpen ? "none" : "block"}}>
-                    <img className={cl.sidebarImage} src={logoLarge} alt={'Logo'}/>
-                </div>
-                <div style={{marginLeft: isOpen ? "0px" : "20px", marginRight: isOpen ? "0px" : "30px"}} className={cl.bars}>
-                    <FaBars onClick={toggle}/>
+                <div className={cl.sidebarImage} style={{padding: isOpen ? "11px 0" : "10px"}} onClick={toggle}>
+                    <div style={{paddingLeft: isOpen ? "10px" : "", marginTop: isOpen ? "-1px" : ""}}>
+                        <img
+                            className={cl.sidebarImageLogo}
+                            src={logo}
+                            alt={'Logo'}
+                            draggable={false}
+                        />
+                    </div>
+                    <div style={{display: isOpen ? "none" : "block"}}>
+                        <img
+                            className={cl.sidebarImageText}
+                            src={logoText}
+                            alt={'Logo'}
+                            draggable={false}
+                        />
+                    </div>
                 </div>
             </div>
             {

@@ -7,13 +7,23 @@
 
 .top_section{
     display: flex;
-    justify-content: space-evenly;
-    padding: 20px 0;
+    align-items: start;
+    flex-direction: column;
 }
 
 .sidebarImage {
-    width: 120px;
-    margin-left: 20px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.sidebarImageLogo {
+    scale: 1;
+}
+
+.sidebarImageText {
+    padding-left: 7px;
+    margin-top: -1px;
 }
 
 .bars{
@@ -25,15 +35,16 @@
 
 .sidebarLink{
     display: flex;
+    align-items: center;
     color: #fff;
-    padding: 10px 15px;
+    padding: 10px 36px;
     gap: 15px;
     transition: all 0.5s;
 }
 
 .sidebarLink:hover{
     color: #000;
-    background:#fff;
+    background: #e3e3e3;
 }
 
 .sidebarLink:active {

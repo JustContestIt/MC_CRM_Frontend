@@ -1,10 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react';
-import logoSmall from '../components/img/MnC_logo_small.png';
+import logo from '../components/img/logo.svg';
 import {useLocation, useNavigate} from 'react-router-dom';
 import useInput from "../hooks/useInput";
 import useToggle from "../hooks/useToggle";
 import useAuth from "../hooks/useAuth";
 import axios from '../http/index';
+import cl from "../styles/Form.module.css";
 
 const Login = () => {
 
@@ -65,10 +66,11 @@ const Login = () => {
             <div className='d-flex flex-column form-container mx-auto'>
                 <div className='flex-grow-1 d-flex align-items-center auth-form'>
                     <div className='w-100'>
-                        <p ref={errRef} className={errMsg ? "errMsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                        <p ref={errRef} className={errMsg ? cl.errMsg : cl.offscreen} aria-live="assertive">{errMsg}</p>
                         <div className='text-center'>
-                            <img className='logo' src={logoSmall} alt={'Logo'}/>
+                            <img className='logo' src={logo} alt={'Logo'}/>
                         </div>
+                        <div className='text-center h3 mb-4'>Вход</div>
                         <div>
                             <form className='d-flex flex-column' onSubmit={handleSubmit}>
                                 <div className="form-group mb-3">

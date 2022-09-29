@@ -1,8 +1,8 @@
 const Icon = ({icon, classes}) => {
     return (
-        <div className={`icon ${classes}`}>
+        <span className={'icon ' + classes}>
             {icon}
-        </div>
+        </span>
     );
 };
 
