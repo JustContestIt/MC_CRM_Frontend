@@ -1,4 +1,3 @@
-import React from "react";
 import {Route, Routes} from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -10,7 +9,7 @@ import WaitingLogin from "./components/WaitingLogin";
 import Main from "./pages/Main";
 import Teacher from "./pages/Teacher";
 import Admin from "./pages/Admin";
-import Lounge from "./pages/Lounge";
+import Lessons from "./pages/Lessons";
 import LinkPage from "./pages/LinkPage";
 import Profile from "./pages/Profile";
 
@@ -48,7 +47,7 @@ function App() {
                     </Route>
 
                     <Route element={<RequireAuth allowedRoles={[ROLES.Teacher, ROLES.Admin]} />}>
-                        <Route path="lounge" element={<Lounge />} />
+                        <Route path="lounge" element={<Lessons />} />
                     </Route>
                 </Route>
 

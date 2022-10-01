@@ -62,7 +62,7 @@ const Login = () => {
     }
 
     return (
-        <div className='login d-flex align-items-center overflowHide'>
+        <div className='formBackground d-flex align-items-center overflowHide'>
             <div className='d-flex flex-column form-container mx-auto'>
                 <div className='flex-grow-1 d-flex align-items-center auth-form'>
                     <div className='w-100'>

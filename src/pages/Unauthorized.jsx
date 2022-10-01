@@ -1,5 +1,5 @@
-import {Link, useNavigate} from "react-router-dom"
-import logo from "../components/img/MnC_logo_small.png";
+import {useNavigate} from "react-router-dom"
+import logo from "../components/img/logo.svg";
 
 const Unauthorized = () => {
     const navigate = useNavigate();
@@ -7,7 +7,7 @@ const Unauthorized = () => {
     const goBack = () => navigate(-1);
 
     return (
-        <div className='unAuthorized'>
+        <div className='formBackground unAuthorized'>
             <img className='unAuthorizedLogo' src={logo} alt='logo'/>
             <h1>Доступ закрыт</h1>
             <p>У вас недостаточно прав для доступа к этой странице</p>

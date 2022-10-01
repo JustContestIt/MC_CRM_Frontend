@@ -14,15 +14,17 @@ import useAuth from "../../hooks/useAuth";
 
 
 const Sidebar = () => {
+
     const ROLES = {
         "Admin": 3,
         "Teacher": 2,
         "Student": 1
-    }
+    };
     const { auth } = useAuth();
     const [adminFlag, setAdminFlag] = useState(false)
     const [teacherFlag, setTeacherFlag] = useState(false)
     const [isOpen ,setIsOpen] = useState(false);
+    const toggle = () => setIsOpen (!isOpen);
     const menuItem=[
         {
             path: "/",
@@ -37,8 +39,8 @@ const Sidebar = () => {
             icon: <RiAdminLine/>
         },
         {
-            path: "/teacher",
-            name: "Тренер",
+            path: "/lounge",
+            name: "Уроки",
             roles: [ROLES.Teacher, ROLES.Admin],
             icon: <FaChalkboardTeacher/>
         },
@@ -47,27 +49,8 @@ const Sidebar = () => {
             name: "Профиль",
             roles: [ROLES.Student],
             icon: <CgProfile/>
-        },
-        {
-            path: "/lounge",
-            name: "Тренер и Админ",
-            roles: [ROLES.Teacher, ROLES.Admin],
-            icon: <TbSofa/>
-        },
-        {
-            path: "/login",
-            name: "Вход",
-            roles: [ROLES.Admin],
-            icon: <FiLogIn/>
-        },
-        {
-            path: "/register",
-            name: "Регистрация",
-            roles: [ROLES.Admin],
-            icon: <MdOutlineAppRegistration/>
         }
     ];
-    const toggle = () => setIsOpen (!isOpen);
 
     useEffect(() => {
         if (auth.roles.includes(ROLES.Admin)) setAdminFlag(true)

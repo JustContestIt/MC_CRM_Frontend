@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom"
-import logo from "../components/img/MnC_logo_small.png"
+import logo from "../components/img/logo.svg"
 
 const NotFound = () => {
 
@@ -8,7 +8,7 @@ const NotFound = () => {
     const goBack = () => navigate(-1);
 
     return (
-        <div className='notFound'>
+        <div className='formBackground notFound'>
             <img className='notFoundLogo' src={logo} alt='logo'/>
             <h1>Oops!</h1>
             <p>Страница не найдена!</p>

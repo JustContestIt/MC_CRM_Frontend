@@ -1,29 +1,23 @@
 .topNav {
-    background-color: #fff;
-    overflow: hidden;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .topNavTitle {
-    font-size: 40px;
-    float: left;
+    font-size: 36px;
     display: block;
     color: black;
     text-align: center;
-    padding: 14px 0 10px 30px;
+    padding: 20px 0 10px 30px;
     text-decoration: none;
-}
-
-.topNav .icon {
-    display: none;
 }
 
 .dropdown {
     float: left;
     overflow: hidden;
     padding-right: 40px;
-    padding-top: 20px;
+    padding-top: 10px;
 }
 
 .dropdownIcon {
@@ -33,7 +27,6 @@
 .dropdown .dropBtn {
     font-size: 20px;
     border: none;
-    outline: none;
     color: black;
     padding: 14px 16px;
     background-color: inherit;
@@ -89,35 +82,4 @@
 
 .dropdown:hover .dropdownContent {
     display: block;
-}
-
-@media screen and (max-width: 768px) {
-    .topNav a:not(:first-child), .dropdown .dropBtn {
-        display: none;
-    }
-    .topNav a.icon {
-        float: right;
-        display: block;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .topNav.responsive {position: relative;}
-    .topNav.responsive a.icon {
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-    .topNav.responsive a {
-        float: none;
-        display: block;
-        text-align: left;
-    }
-    .topNav.responsive .dropdown {float: none;}
-    .topNav.responsive .dropdownContent {position: relative;}
-    .topNav.responsive .dropdown .dropBtn {
-        display: block;
-        width: 100%;
-        text-align: left;
-    }
 }
