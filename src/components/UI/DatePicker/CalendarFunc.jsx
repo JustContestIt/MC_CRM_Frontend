@@ -66,26 +66,3 @@ export function getMonthDataYM(year, month) {
 
     return result;
 }
-
-export function getMonthDataDate(newDate) {
-    const result = [];
-    const year = newDate.getFullYear()
-    const month = newDate.getMonth()
-    const date = new Date(year, month);
-    const daysInMonth = getDaysInMonth(date);
-    const monthStartsOn = getDayOfWeek(date);
-    let day = 1;
-
-    for (let i = 0; i < (daysInMonth + monthStartsOn) / DAYS_IN_WEEK; i++) {
-        result[i] = [];
-        for (let j = 0; j < DAYS_IN_WEEK; j++) {
-            if ((i === 0 && j < monthStartsOn) || day > daysInMonth) {
-                result[i][j] = undefined;
-            } else {
-                result[i][j] = new Date(year, month, day++);
-            }
-        }
-    }
-
-    return result;
-}
