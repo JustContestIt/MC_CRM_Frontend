@@ -8,7 +8,7 @@ const NotFound = () => {
     const goBack = () => navigate(-1);
 
     return (
-        <div className='formBackground notFound'>
+        <div className='formBackground notFound overflow-hidden'>
             <img className='notFoundLogo' src={logo} alt='logo'/>
             <h1>Oops!</h1>
             <p>Страница не найдена!</p>

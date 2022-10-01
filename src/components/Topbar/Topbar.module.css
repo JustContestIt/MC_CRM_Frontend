@@ -14,29 +14,30 @@
 }
 
 .dropdown {
-    float: left;
+    /*float: left;*/
+
     overflow: hidden;
-    padding-right: 40px;
-    padding-top: 10px;
+    padding-right: 60px;
+    padding-top: 15px;
 }
 
 .dropdownIcon {
     font-size: 27px !important;
 }
 
-.dropdown .dropBtn {
+.dropBtn {
     font-size: 20px;
     border: none;
     color: black;
     padding: 14px 16px;
     background-color: inherit;
-    font-family: inherit;
-    margin: 0;
 }
 
 .dropdownContent {
     display: none;
     position: absolute;
+    top: 80px;
+    right: 45px;
     background-color: #f9f9f9;
     min-width: 160px;
     border-radius: 10px;

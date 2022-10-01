@@ -125,7 +125,6 @@ a, a:hover, a:focus {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 85vh;
 }
 
 .unAuthorizedLogo {

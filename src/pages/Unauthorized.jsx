@@ -7,7 +7,7 @@ const Unauthorized = () => {
     const goBack = () => navigate(-1);
 
     return (
-        <div className='formBackground unAuthorized'>
+        <div className='formBackground unAuthorized overflow-hidden'>
             <img className='unAuthorizedLogo' src={logo} alt='logo'/>
             <h1>Доступ закрыт</h1>
             <p>У вас недостаточно прав для доступа к этой странице</p>
