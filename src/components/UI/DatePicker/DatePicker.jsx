@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import classnames from 'classnames';
 import * as calendarFunc from './CalendarFunc';
 import cl from './DatePicker.module.css';
@@ -82,7 +82,7 @@ const Calendar = ({setPickedDate, openedCal, setOpenedCal}) => {
                     onChange={handleSelectChange}
                 >
                     {monthNames.map((name, index) =>
-                        <option key={name} value={index} className={cl.calendarFormSelectOption}>{name}</option>
+                            <option key={name} value={index}>{name}</option>
                     )}
                 </select>
 
@@ -93,7 +93,7 @@ const Calendar = ({setPickedDate, openedCal, setOpenedCal}) => {
                     onChange={handleSelectChange}
                 >
                     {years.map(year =>
-                        <option key={year} value={year} className={cl.calendarFormSelectOption}>{year}</option>
+                        <option key={year} value={year}>{year}</option>
                     )}
                 </select>
 
