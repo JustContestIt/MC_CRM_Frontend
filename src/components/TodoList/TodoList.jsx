@@ -36,7 +36,8 @@ const TodoList = () => {
         setNewItem,
         createItem,
         updateItem,
-        modal
+        modal,
+        emptyItem
     }
 
     const [emptyList, setEmptyList] = useState(false)
@@ -99,17 +100,13 @@ const TodoList = () => {
         else deleteItem(item)
     }
 
-    const resetTodoItem = () => {
-        setNewItem(emptyItem)
-    }
-
     useEffect(() => {
         fetchTodo()
     }, [])
 
     return (
         <Spinner isLoading={isLoading}>
-            <MyModal visible={modal} setVisible={setModal} resetItem={resetTodoItem}>
+            <MyModal visible={modal} setVisible={setModal}>
                 <TodoForm newItemForm={newItemForm}/>
             </MyModal>
             <div className='d-flex justify-content-between align-items-center'>
@@ -117,14 +114,20 @@ const TodoList = () => {
                 <button
                     type='button'
                     className='btn btn-primary mb-2 mt-3'
-                    onClick={() => setModal(1)}
+                    onClick={() => {
+                        setNewItem(emptyItem)
+                        setModal(1)
+                    }}
                 >Создать</button>
             </div>
             <div>
                 <ul className="list-group">
                     {items.map(item => {
                         return(
-                            <li className={`pb-2 rounded-3 mt-2 border ${cl.todoItem}`} key={item.id}>
+                            <li
+                                className={`pb-2 rounded-3 mt-2 border ${cl.todoItem}`}
+                                key={item.id}
+                            >
                                 <TodoItem
                                     callTodoForm={callTodoForm}
                                     item={item}

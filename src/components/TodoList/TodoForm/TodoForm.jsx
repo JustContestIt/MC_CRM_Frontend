@@ -4,19 +4,19 @@ const TodoForm = ({ newItemForm }) => {
 
     const [inputValue, setInputValue] = useState("")
     const [textValue, setTextValue] = useState("")
-    const btnLabel = ["Добавить", "Изменить"]
 
     useEffect(() => {
         setInputValue(newItemForm.newItem.title)
         setTextValue(newItemForm.newItem.body)
     }, [newItemForm.modal])
 
-    function doCRUD() {
+    const doCRUD = () => {
+        setInputValue("")
+        setTextValue("")
+        newItemForm.setNewItem(newItemForm.emptyItem)
         if (newItemForm.modal === 1) newItemForm.createItem(newItemForm.newItem)
         else newItemForm.updateItem(newItemForm.newItem)
     }
-
-    if (newItemForm.modal !== 1 && newItemForm.modal !== 2) return(<div className='d-none'></div>)
 
     return (
         <div className="input-group d-flex flex-column">
@@ -40,7 +40,7 @@ const TodoForm = ({ newItemForm }) => {
                 <label className="form-label">Описание</label>
                 <textarea
                     className="form-control"
-                    rows="3"
+                    rows="6"
                     value={textValue}
                     onChange={e => {
                         setTextValue(e.target.value)
@@ -55,13 +55,12 @@ const TodoForm = ({ newItemForm }) => {
             <button
                 className="btn btn-primary mb-1 rounded rounded-3"
                 type="button"
-                onClick={() => {
-                    setInputValue("")
-                    setTextValue("")
-                    doCRUD()
-                }}
+                onClick={doCRUD}
             >
-                {btnLabel[newItemForm.modal - 1]}
+                {inputValue && textValue
+                    ? "Изменить"
+                    : "Добавить"
+                }
             </button>
         </div>
     );

@@ -1,6 +1,6 @@
 import cl from './MyModal.module.css';
 
-const MyModal = ({children, visible, setVisible, resetItem}) => {
+const MyModal = ({children, visible, setVisible}) => {
 
     const rootClasses = [cl.overlay];
     if (visible !== 0) {
@@ -8,10 +8,7 @@ const MyModal = ({children, visible, setVisible, resetItem}) => {
     }
 
     return (
-        <div className={rootClasses.join(' ')} onClick={() => {
-            setVisible(0)
-            if (resetItem) resetItem()
-        }}>
+        <div className={rootClasses.join(' ')} onClick={() => setVisible(0)}>
             <div className={cl.popup} onClick={(e) => e.stopPropagation()}>
                 {children}
             </div>

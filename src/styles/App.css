@@ -15,10 +15,6 @@ p {
     color: #606060;
 }
 
-.App{
-    display: flex;
-}
-
 .btn-nav{
     width: 100px;
     height: 40px;
@@ -137,30 +133,6 @@ a, a:hover, a:focus {
     border: 1px solid lightgray;
     border-radius: 10px;
     overflow: auto;
-}
-
-.calendar header {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 8px;
-}
-
-.calendar header button,
-.calendar header select {
-    margin: 0 4px;
-}
-
-.calendar table {
-    table-layout: fixed;
-    border-collapse: separate;
-    border-spacing: 0;
-    margin: auto;
-}
-
-.calendar th {
-    vertical-align: middle;
-    text-align: center;
-    height: 36px;
 }
 
 .calendarDay {
