@@ -20,6 +20,12 @@ const TodoForm = ({ newItemForm }) => {
 
     return (
         <div className="input-group d-flex flex-column">
+            <p className='text-center mb-4 h2'>{inputValue && textValue
+                ? "Изменить задачу"
+                : "Создать задачу"
+            }
+            </p>
+            <br/>
             <div className="mb-3">
                 <label className="form-label">Заголовок</label>
                 <input
