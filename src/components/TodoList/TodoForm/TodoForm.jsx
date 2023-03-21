@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import cl from './TodoForm.module.css';
 
 const TodoForm = ({ newItemForm }) => {
 
@@ -11,20 +12,20 @@ const TodoForm = ({ newItemForm }) => {
     }, [newItemForm.modal])
 
     const doCRUD = () => {
+        if (newItemForm.modal === 1) newItemForm.createItem(newItemForm.newItem)
+        else newItemForm.updateItem(newItemForm.newItem)
         setInputValue("")
         setTextValue("")
         newItemForm.setNewItem(newItemForm.emptyItem)
-        if (newItemForm.modal === 1) newItemForm.createItem(newItemForm.newItem)
-        else newItemForm.updateItem(newItemForm.newItem)
     }
 
     return (
-        <div className="input-group d-flex flex-column">
-            <p className='text-center mb-4 h2'>{inputValue && textValue
+        <div className={"input-group d-flex flex-column " + cl.todoForm}>
+            <div className='text-center mb-4 h2'>{inputValue && textValue
                 ? "Изменить задачу"
                 : "Создать задачу"
             }
-            </p>
+            </div>
             <br/>
             <div className="mb-3">
                 <label className="form-label">Заголовок</label>

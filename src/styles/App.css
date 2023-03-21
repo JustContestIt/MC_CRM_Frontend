@@ -130,6 +130,7 @@ a, a:hover, a:focus {
 
 .ItemList {
     max-height: 77vh;
+    min-width: 200px;
     border: 1px solid lightgray;
     border-radius: 10px;
     overflow: auto;

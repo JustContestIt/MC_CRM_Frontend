@@ -23,7 +23,7 @@ const Topbar = ({children, title}) => {
                         </button>
                         <div className={cl.dropdownContent}>
                             <Link to='/profile' className={cl.linkOne}>Профиль</Link>
-                            <a href='' className={cl.linkTwo} onClick={useLogout()}>Выйти</a>
+                            <Link to='/' className={cl.linkTwo} onClick={useLogout()}>Выйти</Link>
                         </div>
                     </div>
                 </div>

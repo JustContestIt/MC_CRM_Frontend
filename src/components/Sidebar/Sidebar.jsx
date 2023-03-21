@@ -39,7 +39,7 @@ const Sidebar = () => {
             icon: <RiAdminLine/>
         },
         {
-            path: "/lounge",
+            path: "/lessons",
             name: "Уроки",
             roles: [ROLES.Teacher, ROLES.Admin],
             icon: <FaChalkboardTeacher/>

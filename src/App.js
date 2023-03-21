@@ -47,7 +47,7 @@ function App() {
                     </Route>
 
                     <Route element={<RequireAuth allowedRoles={[ROLES.Teacher, ROLES.Admin]} />}>
-                        <Route path="lounge" element={<Lessons />} />
+                        <Route path="lessons" element={<Lessons />} />
                     </Route>
                 </Route>
 

@@ -1,10 +1,12 @@
 import Topbar from "../components/Topbar/Topbar";
-import Users from "../components/Users";
+import LessonsList from "../components/LessonsList/LessonsList";
 
 const Lessons = () => {
     return (
         <Topbar title={'Уроки'}>
-            <Users />
+            <div className='col-9'>
+                <LessonsList/>
+            </div>
         </Topbar>
     )
 }

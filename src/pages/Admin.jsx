@@ -1,13 +1,13 @@
 import Topbar from "../components/Topbar/Topbar";
-import StudentList from "../components/StudentList/StudentList";
+import Users from "../components/Users";
 import TodoList from "../components/TodoList/TodoList";
 
 const Admin = () => {
     return (
         <Topbar title={'Админка'}>
-            <div className='col-8'>
+            <div className='col col-lg-4'>
                 <div className='p-2 mx-3 rounded-5 mt-2 ItemList col'>
-                    <StudentList/>
+                    <Users/>
                 </div>
             </div>
             <div className='col'>
@@ -15,7 +15,6 @@ const Admin = () => {
                     <TodoList/>
                 </div>
             </div>
-            {/*<Users />*/}
         </Topbar>
     )
 }
